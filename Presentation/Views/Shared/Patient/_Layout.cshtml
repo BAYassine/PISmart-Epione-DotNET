@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mon application ASP.NET</title>
+
+
+    <!-- Favicon and Touch Icons -->
+    <link href="Content/images/favicon.png" rel="shortcut icon" type="image/png">
+    <link href="Content/images/apple-touch-icon.png" rel="icon">
+    <link href="Content/images/apple-touch-icon-72x72.png" rel="icon" sizes="72x72">
+    <link href="Content/images/apple-touch-icon-114x114.png" rel="icon" sizes="114x114">
+    <link href="Content/images/apple-touch-icon-144x144.png" rel="icon" sizes="144x144">
+
+    <!-- Stylesheet -->
+    @Styles.Render("~/Content/Medikal-css/bootstrap.min.css")
+    @Styles.Render("~/Content/Medikal-css/jquery-ui.min.css")
+    @Styles.Render("~/Content/Medikal-css/animate.css")
+    @Styles.Render("~/Content/Medikal-css/css-plugin-collections.css")
+    <!-- CSS | menuzord megamenu skins -->
+    @Styles.Render("~/Content/Medikal-css/menuzord-skins/menuzord-boxed.css")
+    <!-- CSS | Main style file -->
+    @Styles.Render("~/Content/Medikal-css/style-main.css")
+    <!-- CSS | Preloader Styles -->
+    @Styles.Render("~/Content/Medikal-css/preloader.css")
+    <!-- CSS | Custom Margin Padding Collection -->
+    @Styles.Render("~/Content/Medikal-css/custom-bootstrap-margin-padding.css")
+    <!-- CSS | Responsive media queries -->
+    @Styles.Render("~/Content/Medikal-css/responsive.css")
+    <!-- CSS | Style css. This is the file where you can place your own custom css code. Just uncomment it and use it. -->
+    <!-- <link href="css/style.css" rel="stylesheet" type="text/css"> -->
+    <!-- Revolution Slider 5.x CSS settings -->
+    @Styles.Render("~/Scripts/Medikal-js/revolution-slider/css/settings.css")
+    @Styles.Render("~/Scripts/Medikal-js/revolution-slider/css/layers.css")
+    @Styles.Render("~/Scripts/Medikal-js/revolution-slider/css/navigation.css")
+
+    <!-- CSS | Theme Color -->
+    @Styles.Render("~/Content/Medikal-css/colors/theme-skin-blue.css")
+
+
+    @Scripts.Render("~/Scripts/Medikal-js/jquery-2.2.4.min.js")
+    @Scripts.Render("~/Scripts/Medikal-js/jquery-ui.min.js")
+    @Scripts.Render("~/Scripts/Medikal-js/bootstrap.min.js")
+    <!-- JS | jquery plugin collection for this theme -->
+    @Scripts.Render("~/Scripts/Medikal-js/jquery-plugin-collection.js")
+
+    <!-- Revolution Slider 5.x SCRIPTS -->
+    @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/jquery.themepunch.tools.min.js")
+    @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/jquery.themepunch.revolution.min.js")
+
+</head>
+<body class="has-side-panel side-panel-right fullwidth-page side-push-panel">
+    <div class="body-overlay"></div>
+    <div id="side-panel" class="dark" data-bg-img="Content/images/bg/bg8.jpg">
+        <div class="side-panel-wrap">
+            <div id="side-panel-trigger-close" class="side-panel-trigger"><a href="#"><i class="pe-7s-close font-36"></i></a></div>
+            <a href="javascript:void(0)"><img alt="logo" src="Content/images/logo-wide.png"></a>
+            <div class="side-panel-nav mt-30">
+                <div class="widget no-border">
+                    <nav>
+                        <ul class="nav nav-list">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li>
+                                <a class="tree-toggler nav-header">Pages <i class="fa fa-angle-down"></i></a>
+                                <ul class="nav nav-list tree">
+                                    <li><a href="#">About</a></li>
+                                    <li><a href="#">Terms</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="side-panel-widget mt-30">
+                <div class="widget no-border">
+                    <ul>
+                        <li class="font-14 mb-5"> <i class="fa fa-phone text-theme-colored"></i> <a href="#" class="text-gray">123-456-789</a> </li>
+                        <li class="font-14 mb-5"> <i class="fa fa-clock-o text-theme-colored"></i> Mon-Fri 8:00 to 2:00 </li>
+                        <li class="font-14 mb-5"> <i class="fa fa-envelope-o text-theme-colored"></i> <a href="#" class="text-gray">contact@yourdomain.com</a> </li>
+                    </ul>
+                </div>
+                <div class="widget">
+                    <ul class="styled-icons icon-dark icon-theme-colored icon-sm">
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+                <p>Copyright &copy;2016 ThemeMascot</p>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper" class="clearfix">
+        <!-- preloader -->
+        <div id="preloader">
+            <div id="spinner">
+                <img src="images/preloaders/1.gif" alt="">
+            </div>
+            <div id="disable-preloader" class="btn btn-default btn-sm">Disable Preloader</div>
+        </div>
+        @RenderPage("_Header.cshtml")
+
+        <div class="main-content">
+            @RenderBody()
+        </div>
+
+        @Scripts.Render("~/Scripts/Medikal-js/custom.js")
+
+        <!-- SLIDER REVOLUTION 5.0 EXTENSIONS
+          (Load Extensions only on Local File Systems !
+           The following part can be removed on Server for On Demand Loading) -->
+        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.actions.min.js")
+        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.carousel.min.js")
+        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.kenburn.min.js")
+        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.layeranimation.min.js")
+        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.migration.min.js")
+        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.navigation.min.js")
+        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.parallax.min.js")
+        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.slideanims.min.js")
+        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.video.min.js")
+        @RenderSection("scripts", required: false)
+</body>
+</html>
