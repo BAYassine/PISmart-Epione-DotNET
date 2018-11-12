@@ -1,0 +1,78 @@
+﻿@model Presentation.Models.UserVM
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<section class="inner-header divider parallax layer-overlay overlay-white-8" data-bg-img="images/bg/bg6.jpg">
+    <div class="container pt-60 pb-60">
+        <!-- Section Content -->
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3 class="font-28">
+                        My Account</h2>
+                        <ol class="breadcrumb text-center text-black mt-10">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Pages</a></li>
+                            <li class="active text-theme-colored">Page Title</li>
+                        </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-push-3">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="icon-box mb-0 p-0">
+                        <a href="#" class="icon icon-bordered icon-rounded icon-sm pull-left mb-0 mr-10">
+                            <i class="pe-7s-users"></i>
+                        </a>
+                        <h4 class="text-gray pt-10 mt-0 mb-30">Don't have an Account? Register Now.</h4>
+                    </div>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.confirmPassword, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.confirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.confirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label" })
+                            @Html.EnumDropDownListFor(model => model.role, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-dark btn-lg btn-block mt-15" type="submit">Register Now</button>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
