@@ -9,6 +9,9 @@ namespace Domain.Entities
     [Table("epione.profile")]
     public partial class Profile
     {
+
+        public enum Gender { FEMALE, MALE }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Profile()
         {
@@ -27,7 +30,7 @@ namespace Domain.Entities
         [StringLength(255)]
         public string firstname { get; set; }
 
-        public int gender { get; set; }
+        public Gender gender { get; set; }
 
         [Required]
         [StringLength(255)]

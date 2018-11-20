@@ -7,7 +7,7 @@ namespace Domain.Entities
    
 
     [Table("epione.doctor")]
-    public partial class Doctor
+    public partial class Doctor : User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Doctor()
@@ -79,8 +79,6 @@ namespace Domain.Entities
         public virtual Speciality speciality { get; set; }
 
         public virtual Skill skill { get; set; }
-
-        public virtual User user { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Path> paths { get; set; }

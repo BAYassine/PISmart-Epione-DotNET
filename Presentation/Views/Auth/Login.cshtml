@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Login";
+    var parameters = new { action = "Index", controller = "Home" };
 }
 
 
@@ -11,7 +12,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h3 class="font-28">
-                        My Account</h2>
+                        My Account</h3>
                         <ol class="breadcrumb text-center text-black mt-10">
                             <li><a href="#">Home</a></li>
                             <li><a href="#">Pages</a></li>
@@ -27,6 +28,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-push-3">
+                @if (ViewData["error"] != null)
+                {
+                    <div class="row">
+                        <div class="alert alert-danger col-md-12">@ViewData["error"]</div>
+                    </div>
+                }
                 <h4 class="text-gray mt-0 pt-5"> Login</h4>
                 <hr>
                 <!--<section id="loginForm">-->
@@ -42,34 +49,34 @@
                             @*@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Password</label>
-                                @Html.Password("password","", new { @class = "form-control" })
-                                @*Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })*@
-                            </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Password</label>
+                            @Html.Password("password","", new { @class = "form-control" })
+                            @*Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })*@
                         </div>
-                        @*<div class="checkbox pull-left mt-15">
-                                <label for="form_checkbox">
-                                    @Html.CheckBoxFor(m => m.RememberMe)
-                                    @Html.LabelFor(m => m.RememberMe)
-                                </label>
-                            </div>*@
-                        <div class="form-group pull-right mt-10">
-                            <button type="submit" class="btn btn-dark btn-sm">Login</button>
-                        </div>
-                        <div class="clear text-center pt-10">
-                            <a class="text-theme-colored font-weight-600 font-12" href="#">Forgot Your Password?</a>
-                        </div>
-                        <div class="clear text-center pt-10">
-                            <a class="btn btn-dark btn-lg btn-block no-border mt-15 mb-15" href="#" data-bg-color="#3b5998">Login with facebook</a>
-                            <a class="btn btn-dark btn-lg btn-block no-border" href="#" data-bg-color="#00acee">Login with twitter</a>
-                        </div>
-                        @* Activer ceci une fois que la confirmation de votre compte est activée pour la fonctionnalité de réinitialisation du mot de passe
-                            <p>
-                                @Html.ActionLink("Vous avez oublié votre mot de passe ?", "ForgotPassword")
-                            </p>*@
-                        <!--</section>-->
+                    </div>
+                            @*<div class="checkbox pull-left mt-15">
+                                    <label for="form_checkbox">
+                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                        @Html.LabelFor(m => m.RememberMe)
+                                    </label>
+                                </div>*@
+                    <div class="form-group pull-right mt-10">
+                        <button type="submit" class="btn btn-dark btn-sm">Login</button>
+                    </div>
+                    <div class="clear text-center pt-10">
+                        <a class="text-theme-colored font-weight-600 font-12" href="#">Forgot Your Password?</a>
+                    </div>
+                    <div class="clear text-center pt-10">
+                        <a class="btn btn-dark btn-lg btn-block no-border mt-15 mb-15" href="#" data-bg-color="#3b5998">Login with facebook</a>
+                        <a class="btn btn-dark btn-lg btn-block no-border" href="#" data-bg-color="#00acee">Login with twitter</a>
+                    </div>
+                            @* Activer ceci une fois que la confirmation de votre compte est activée pour la fonctionnalité de réinitialisation du mot de passe
+                                <p>
+                                    @Html.ActionLink("Vous avez oublié votre mot de passe ?", "ForgotPassword")
+                                </p>*@
+                    <!--</section>-->
                 }
                 <!--<div class="col-md-4">
                     <section id="socialLoginForm">
@@ -79,6 +86,7 @@
 
             </div>
         </div>
+    </div>
 </section>
 
 @section Scripts {
