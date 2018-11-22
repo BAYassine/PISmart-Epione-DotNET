@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using Presentation.Models;
+﻿using Presentation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
