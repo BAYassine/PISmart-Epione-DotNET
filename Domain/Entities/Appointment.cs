@@ -8,6 +8,11 @@ namespace Domain.Entities
     [Table("epione.appointment")]
     public partial class Appointment
     {
+        public enum States
+        {
+            CANCELED, UPCOMING, ONGOING, DONE
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Appointment()
         {
@@ -24,7 +29,7 @@ namespace Domain.Entities
         [StringLength(255)]
         public string message { get; set; }
 
-        public int? state { get; set; }
+        public States state { get; set; }
 
         public int? doctor_id { get; set; }
 

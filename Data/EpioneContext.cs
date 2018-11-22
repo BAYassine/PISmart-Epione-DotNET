@@ -266,14 +266,6 @@ namespace Data
                 .Property(e => e.username)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<User>()
-                .HasOptional(e => e.doctor)
-                .WithRequired(e => e.user);
-
-            modelBuilder.Entity<User>()
-                .HasOptional(e => e.patient)
-                .WithRequired(e => e.user);
-
             modelBuilder.Entity<Skill>()
                 .Property(e => e.skills)
                 .IsUnicode(false);

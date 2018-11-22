@@ -1,0 +1,80 @@
+﻿﻿<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from thememakker.com/templates/swift/hospital/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 10 Nov 2018 14:33:09 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>:: @ViewBag.Title - Doctor space ::</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    @Styles.Render("~/Content/Swift-css/plugins/bootstrap/css/bootstrap.min.css")
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css">
+    @Styles.Render("~/Content/Swift-css/plugins/morrisjs/morris.css")
+    <!-- Custom Css -->
+    @Styles.Render("~/Content/Swift-css/css/main.css")
+</head>
+<body class="theme-blue">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-cyan">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+
+    <!-- #Float icon -->
+    <ul id="f-menu" class="mfbc-br mfb-zoomin" data-mfb-toggle="hover">
+        <li class="mfbc_wrap">
+            <a href="javascript:void(0);" class="mfbcb-main g-bg-cyan">
+                <i class="mfbcm-icon-resting zmdi zmdi-plus"></i>
+                <i class="mfbcm-icon-active zmdi zmdi-close"></i>
+            </a>
+            <ul class="mfbc_list">
+                <li><a href="#" data-mfb-label="Doctor Schedule" class="mfb-child bg-blue"><i class="zmdi zmdi-calendar mfbc_icon"></i></a></li>
+                <li><a href="#" data-mfb-label="Patients List" class="mfb-child bg-orange"><i class="zmdi zmdi-account-o mfbc_icon"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+
+    
+
+    <!-- Top Bar -->
+    <nav class="navbar clearHeader">
+        @RenderPage("_Header.cshtml")
+    </nav>
+    <!-- #Top Bar -->
+    @RenderPage("_SideBar.cshtml")
+    <section class="content home">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </section>
+
+    <div class="color-bg"></div>
+    <!-- Jquery Core Js -->
+    @Scripts.Render("~/Scripts/Swift-js/bundles/libscripts.bundle.js") <!-- Lib Scripts Plugin Js -->
+    @Scripts.Render("~/Scripts/Swift-js/bundles/vendorscripts.bundle.js") <!-- Lib Scripts Plugin Js -->
+
+    @Scripts.Render("~/Scripts/Swift-js/bundles/chartscripts.bundle.js") <!-- Chart Plugins Js -->
+    @Scripts.Render("~/Scripts/Swift-js/bundles/sparklinescripts.bundle.js") <!-- Chart Plugins Js -->
+
+    @Scripts.Render("~/Scripts/Swift-js/bundles/mainscripts.bundle.js") <!-- Custom Js -->
+    @Scripts.Render("~/Scripts/Swift-js/js/pages/index.js")
+    @Scripts.Render("~/Scripts/Swift-js/js/pages/charts/sparkline.min.js")
+</body>
+
+<!-- Mirrored from thememakker.com/templates/swift/hospital/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 10 Nov 2018 14:33:09 GMT -->
+</html>

@@ -38,7 +38,15 @@
                         </a>
                         <h4 class="text-gray pt-10 mt-0 mb-30">Don't have an Account? Register Now.</h4>
                     </div>
-                        <hr>
+                    <hr>
+                    if (ViewData["error"] != null)
+                    {
+                        <div class="row">
+                            <div class="col-md-12 alert alert-danger">
+                                @ViewData["error"]
+                            </div>
+                        </div>
+                    }
                         <div class="row">
                             <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label" })

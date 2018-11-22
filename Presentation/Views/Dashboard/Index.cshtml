@@ -1,0 +1,84 @@
+﻿@using Newtonsoft.Json.Linq
+@using Domain.Entities
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/Doctor/_Layout.cshtml";
+    JObject data = (JObject)ViewData["dash_data"];
+    JArray jarray = (JArray)data.GetValue("appointments upcoming");
+    List<Appointment> appointments = jarray.ToObject<List<Appointment>>();
+}
+
+<h2>Dashboard</h2>
+<div class="row">
+    <div class="col-md-3">
+        <div class="info-box-2 bg-light-blue hover-zoom-effect">
+            <div class="icon"> <i class="material-icons">access_alarm</i> </div>
+            <div class="content">
+                <div class="text">Average appointement duration</div>
+                <div class="number">@data["average duration for consultations"]</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="info-box-2 bg-indigo hover-zoom-effect">
+            <div class="icon"> <i class="material-icons">insert_invitation</i> </div>
+            <div class="content">
+                <div class="text">Average appointments per  day</div>
+                <div class="number">@(((float)data["average appointements per day"]).ToString("0.00"))</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="info-box-2 bg-blush hover-zoom-effect">
+            <div class="icon"> <i class="material-icons">insert_invitation</i> </div>
+            <div class="content">
+                <div class="text">Total appointments this week</div>
+                <div class="number">@data["total appointments this week"]</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="header">
+                <h2>Next appointments</h2>
+                <ul class="header-dropdown">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another action</a></li>
+                            <li><a href="javascript:void(0);">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Appointment app in appointments)
+                            {
+                                <tr>
+                                    <td>@app.id</td>
+                                    <td>@app.patient.username</td>
+                                    @{ DateTime date = ((DateTime)@app.date_start); }
+                                    <td>@date.ToShortTimeString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
