@@ -11,10 +11,10 @@ namespace Domain.Entities
     {
         public int id { get; set; }
 
-        [StringLength(255)]
+         
         public string description { get; set; }
 
-        [StringLength(255)]
+         
         public string recomended_doc { get; set; }
 
         public int? appointment_id { get; set; }

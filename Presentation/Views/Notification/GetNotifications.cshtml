@@ -1,0 +1,29 @@
+﻿
+
+@model IEnumerable<Presentation.Models.NotificationVM>
+@using Presentation.Models
+@{
+    ViewBag.Title = "GetNotifications";
+}
+
+<h2>GetNotifications</h2>
+<li>
+
+
+    @foreach (var item in ViewBag.notification)
+    {
+
+        <tr>
+
+            <td>
+                @item.content
+
+            </td>
+            <td>
+                @item.id
+
+            </td>
+        </tr>
+    }
+
+</li>

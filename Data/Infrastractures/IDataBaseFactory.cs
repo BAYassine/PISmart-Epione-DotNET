@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Formation.Data.Infrastructures
+namespace Data.Infrastructures
 {
     public interface IDataBaseFactory :IDisposable
     {
-       FormationContext DataContext { get;  }
+        EpioneContext DataContext { get;  }
     }
 }

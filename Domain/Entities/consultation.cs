@@ -23,7 +23,7 @@ namespace Domain.Entities
 
         public int rating { get; set; }
 
-        [StringLength(255)]
+         
         public string remarks { get; set; }
 
         public int? appointment_id { get; set; }

@@ -18,22 +18,22 @@ namespace Domain.Entities
         public int id { get; set; }
 
         [Required]
-        [StringLength(255)]
+         
         public string address { get; set; }
 
         public DateTime birthDate { get; set; }
 
         [Required]
-        [StringLength(255)]
+         
         public string firstname { get; set; }
 
         public int gender { get; set; }
 
         [Required]
-        [StringLength(255)]
+         
         public string lastname { get; set; }
 
-        [StringLength(255)]
+         
         public string telephone { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

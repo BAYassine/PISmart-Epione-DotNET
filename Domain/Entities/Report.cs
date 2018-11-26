@@ -11,14 +11,14 @@ namespace Domain.Entities
     {
         public int id { get; set; }
 
-        [StringLength(255)]
+         
         public string content { get; set; }
 
         public DateTime? date_rep { get; set; }
 
         public int? consultation_id { get; set; }
 
-        [StringLength(255)]
+         
         public string pathFile { get; set; }
 
         public int? patient_id { get; set; }

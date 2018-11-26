@@ -21,12 +21,12 @@ namespace Domain.Entities
 
         public DateTime? date_start { get; set; }
 
-        [StringLength(255)]
+         
         public string message { get; set; }
 
         public int? state { get; set; }
 
-        public int? doctor_id { get; set; }
+        public int? doctor_id{ get; set; }
 
         public int? patient_id { get; set; }
 
@@ -43,5 +43,6 @@ namespace Domain.Entities
         public virtual Reason reason { get; set; }
 
         public virtual Patient patient { get; set; }
+      
     }
 }

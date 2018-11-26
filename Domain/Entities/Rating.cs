@@ -11,7 +11,7 @@ namespace Domain.Entities
     {
         public int id { get; set; }
 
-        [StringLength(255)]
+         
         public string comment { get; set; }
 
         public DateTime? created_at { get; set; }

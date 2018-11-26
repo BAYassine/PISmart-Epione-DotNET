@@ -19,7 +19,7 @@ namespace Domain.Entities
 
         public int? patientnotif_id { get; set; }
 
-        [StringLength(255)]
+         
         public string content { get; set; }
 
         public virtual Patient patient { get; set; }

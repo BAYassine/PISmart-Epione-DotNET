@@ -13,7 +13,7 @@ namespace Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Doctor_id { get; set; }
 
-        [StringLength(255)]
+         
         public string skills { get; set; }
 
         public virtual Doctor doctor { get; set; }

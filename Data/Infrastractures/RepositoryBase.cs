@@ -6,15 +6,15 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Formation.Data.Infrastructure
+namespace Data.Infrastructure
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {//new()
    
-        private FormationContext dataContext;
+        private EpioneContext dataContext;
         private readonly IDbSet<T> dbset; // générique
 
-        public RepositoryBase(FormationContext dataContext)
+        public RepositoryBase(EpioneContext dataContext)
         {
             this.dataContext = dataContext;
             dbset = dataContext.Set<T>();// set ; remplit la variable dbset avec T
@@ -55,7 +55,7 @@ namespace Formation.Data.Infrastructure
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where = null, 
             Expression<Func<T, bool>> orderBy = null)
         {
-            IEnumerable<T> Query1 = dbset;
+           
             IQueryable<T> Query = dbset;
             if (where != null)
             {
@@ -65,7 +65,7 @@ namespace Formation.Data.Infrastructure
             {
                 Query = Query.OrderBy(orderBy);
             }
-            return Query1;
+            return Query;
         }
         public T Get(Expression<Func<T, bool>> where)
         {

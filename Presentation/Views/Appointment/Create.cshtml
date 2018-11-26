@@ -1,0 +1,128 @@
+﻿@model Presentation.Models.AppointmentVM
+@using Domain.Entities
+@{
+    ViewBag.Title = "Create";
+}
+
+<script src="../../Scripts/Medikal-js/bootstrap-datetimepicker.js"></script>
+<link href="../../Content/Medikal-css/bootstrap-datetimepicker.css" rel="stylesheet" />
+<script src="../../Scripts/Medikal-js/bootstrap.min.js"></script>
+<link href="../../Content/Medikal-css/bootstrap-theme.min.css" rel="stylesheet" />
+
+    <section id="home" class="divider bg-lighter">
+        <center>
+            <div class="bg-lightest border-1px p-25">
+
+                <h4 class="text-theme-colored text-uppercase m-0">Make an Appointment</h4>
+                <div class="line-bottom mb-30"></div>
+                <p>Lorem ipsum dolor sit amet, consectetur elit.</p>
+              @using (Html.BeginForm("Create", "Appointment", FormMethod.Post))
+              {
+                 
+                   <div class="row">
+                      
+                        <div class="col-sm-12">
+                            <div class="form-group mb-10">
+                             
+                                  @Html.TextBoxFor(m => m.doctor_id, htmlAttributes: new { id = "idD", @class = "", @placeholder = @ViewBag.doctorid })
+                                @Html.TextBoxFor(m => m.doctor.name, htmlAttributes: new { name = "name", @class = "", @disabled = "disabled", @placeholder = @ViewBag.doctorname })
+                                @*@Html.DropDownListFor(m => m.r,m => m.re, "-- Select a speciality --")*@
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group mb-10">
+                                @Html.DropDownList("reason_id", (SelectList)ViewData["reason_id"])
+
+
+                            </div>
+                        </div>
+                       
+                        <div class="col-sm-12">
+                            <div class="form-group mb-10">
+                                @*<input name="form_appontment_date" class="form-control required date-picker" type="text" placeholder="Appoinment Date" aria-required="true">*@
+                                @Html.TextBoxFor(m => m.date_start, htmlAttributes: new { @class = "datepicker" })
+                             </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group mb-10">
+
+                                @Html.TextAreaFor(m => m.message, htmlAttributes: new { @class = "form-control", @placeholder = "Enter Message" })
+                          
+                                @*<input class="datepicker" type="text" name="date"><br>
+                                <input type="text">
+                                <input type="submit" value="click" name="click" onclick="affiche()">**@
+                             </div>
+                        </div>
+
+                    <div class="form-group mb-0 mt-20">
+                        <input name="form_botcheck" class="form-control" type="hidden" value="">
+                        <button type="submit" class="btn btn-dark btn-theme-colored" onclick="afficherMsg(@ViewBag.result)" data-loading-text="Please wait...">Add Appointment</button>
+                    </div>
+                        </div>
+              }
+                <!-- Appointment Form Validation-->
+                <script type="text/javascript">
+                    $("#appointment_form").validate({
+                        submitHandler: function (form) {
+                            var form_btn = $(form).find('button[type="submit"]');
+                            var form_result_div = '#form-result';
+                            $(form_result_div).remove();
+                            form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
+                            var form_btn_old_msg = form_btn.html();
+                            form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
+                            $(form).ajaxSubmit({
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data.status == 'true') {
+                                        $(form).find('.form-control').val('');
+                                    }
+                                    form_btn.prop('disabled', false).html(form_btn_old_msg);
+                                    $(form_result_div).html(data.message).fadeIn('slow');
+                                    setTimeout(function () { $(form_result_div).fadeOut('slow') }, 6000);
+                                }
+                            });
+                        }
+                    });
+                </script>
+                </div>
+</center>
+    </section>
+<script>
+    function afficheMsg(msg) {alert (msg); }
+var disabledtimes_mapping = ["11/24/2018:8", "11/24/2018:17", "11/26/2018:15:30"];
+function affiche(){
+var date = $(".datepicker").data("datetimepicker").getDate(),
+    formatted = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours()+ ":" + date.getMinutes();
+
+}
+
+function formatDate(datestr)
+{
+    var date = new Date(datestr);
+    var day = date.getDate(); day = day>9?day:"0"+day;
+    var month = date.getMonth()+1; month = month>9?month:"0"+month;
+    return month+"/"+day+"/"+date.getFullYear();
+
+}
+
+$(".datepicker").datetimepicker({
+timeFormat: 'HH:mm:ss',
+     allowTimes: ['09:00', '10:00', '11:00'],
+    maxTime:'09:00',
+    datesDisabled: ['2018-11-20'],
+hoursDisabled:['0','1','2','3','4','5','6','7','19','20','21','22','23'],
+    stepMinute: 15,
+    autoclose: true,
+
+
+    onRenderHour:function(date){
+
+  if(disabledtimes_mapping.indexOf(formatDate(date)+":"+date.getUTCHours())>-1)
+    {
+        return ['disabled'];
+    }
+    }
+});
+</script>
+

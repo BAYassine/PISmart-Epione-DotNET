@@ -1,5 +1,10 @@
-﻿using System;
+﻿
+using Presentation.Models;
+using Service;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,8 +13,15 @@ namespace Presentation.Controllers
 {
     public class HomeController : Controller
     {
+        ISpecialityService serv = new SpecialityService();
         public ActionResult Index()
         {
+       
+            var specialites = serv.GetMany();
+     
+            ViewBag.specialites = new SelectList(specialites, "id", "name");
+
+
             return View();
         }
 

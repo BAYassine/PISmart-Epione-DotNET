@@ -1,0 +1,31 @@
+﻿
+@model IEnumerable<Presentation.Models.NotificationVM>
+@using Presentation.Models
+@{
+    ViewBag.Title = "GetNotifications";
+}
+
+<h2>GetNotifications</h2>
+<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">  <i class="fa fa-bell faa-ring"></i> <span class="indicator"></span></a>
+<ul class="dropdown-menu am-notifications">
+    <li>
+
+
+        @foreach (var item in ViewBag.notification)
+        {
+
+            <tr>
+
+                <td>
+                    @item.content
+
+                </td>
+                <td>
+                    @item.id
+
+                </td>
+            </tr>
+        }
+
+    </li>
+</ul>

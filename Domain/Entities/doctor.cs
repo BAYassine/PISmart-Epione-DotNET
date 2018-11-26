@@ -19,10 +19,10 @@ namespace Domain.Entities
             reasons = new HashSet<Reason>();
         }
 
-        [StringLength(255)]
+         
         public string location { get; set; }
 
-        [StringLength(255)]
+         
         public string presentation { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -30,44 +30,44 @@ namespace Domain.Entities
 
         public int? speciality_id { get; set; }
 
-        [StringLength(255)]
+         
         public string address { get; set; }
 
-        [StringLength(255)]
+         
         public string adresseSocialSiege { get; set; }
 
-        [StringLength(255)]
+         
         public string city { get; set; }
 
-        [StringLength(255)]
+         
         public string formeJuridique { get; set; }
 
-        [StringLength(255)]
+         
         public string image { get; set; }
 
-        public double latitude { get; set; }
+        public string latitude { get; set; }
 
-        public double longitude { get; set; }
+        public string longitude { get; set; }
 
-        [StringLength(255)]
+         
         public string memberAGA { get; set; }
 
-        [StringLength(255)]
+         
         public string name { get; set; }
 
-        [StringLength(255)]
+         
         public string nbreInscriptionOrdre { get; set; }
 
-        [StringLength(255)]
+         
         public string nbreRCS { get; set; }
 
-        [StringLength(255)]
+         
         public string nbreRPPS { get; set; }
 
-        [StringLength(255)]
+         
         public string socialReason { get; set; }
 
-        [StringLength(255)]
+         
         public string statuts { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

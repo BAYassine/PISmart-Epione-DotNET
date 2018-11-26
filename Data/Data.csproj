@@ -60,12 +60,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EpioneContext.cs" />
+    <Compile Include="Infrastractures\DataBaseFactory.cs" />
+    <Compile Include="Infrastractures\Disposable.cs" />
+    <Compile Include="Infrastractures\IDataBaseFactory.cs" />
+    <Compile Include="Infrastractures\IRepositoryBase.cs" />
+    <Compile Include="Infrastractures\IUnitOfWork.cs" />
+    <Compile Include="Infrastractures\RepositoryBase.cs" />
+    <Compile Include="Infrastractures\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configurations\" />
     <Folder Include="CustomConventions\" />
-    <Folder Include="Infrastractures\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

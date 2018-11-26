@@ -1,0 +1,16 @@
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\Service.Pattern.dll.config
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\Service.Pattern.dll
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\Service.Pattern.pdb
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\Data.dll
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\EntityFramework.dll
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\MySql.Data.dll
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\MySql.Data.Entity.EF6.dll
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\Domain.dll
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\Data.pdb
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\EntityFramework.xml
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\bin\Debug\Domain.pdb
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\obj\Debug\Service.Pattern.csprojResolveAssemblyReference.cache
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\obj\Debug\Service.Pattern.dll
+C:\Users\oumayma\git\PISmart-Epione-DotNET\Service.Pattern\obj\Debug\Service.Pattern.pdb
