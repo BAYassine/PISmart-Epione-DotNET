@@ -1,7 +1,9 @@
-﻿@if (Session["authtoken"] != null)
+﻿@using Domain.Entities
+@if (Session["authtoken"] != null)
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Log out","Logout", "Auth")</li>
+        <li>@Session["user"]</li>
+        <li>@Html.ActionLink("Log out", "Logout", "Auth")</li>
     </ul>
 }
 else

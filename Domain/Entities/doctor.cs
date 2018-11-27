@@ -20,13 +20,7 @@ namespace Domain.Entities
         }
 
         [StringLength(255)]
-        public string location { get; set; }
-
-        [StringLength(255)]
         public string presentation { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
 
         public int? speciality_id { get; set; }
 

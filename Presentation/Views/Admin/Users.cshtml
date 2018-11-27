@@ -1,0 +1,91 @@
+﻿@using Domain.Entities
+@using Roles = Presentation.Models.Roles
+@model dynamic
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+}
+
+@section styles
+{
+    
+    @Styles.Render("~/Content/Swift-css/plugins/datatables/dataTables.bootstrap.min.css")
+    @Styles.Render("~/Content/Swift-css/plugins/datatables/responsive.bootstrap.min.css")
+}
+
+<h2>Users list</h2>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="header">
+                <h2> Users list </h2>
+                @Html.ActionLink("Export to Excel", "ExportListUsingEPPlus", "Admin")
+                <ul class="header-dropdown">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                        <ul class="dropdown-menu float-right">
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table id="dataGrid" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Last Login</th>
+                            <th>Registered at</th>
+                            <th>Type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (User user in ViewBag.users)
+                        {
+                            <tr>
+                                <td>@user.Id</td>
+                                <td>@user.username </td>
+                                <td>@user.email</td>
+                                <td>@user.last_login</td>
+                                <td>@user.registered_at</td>
+                                @if (@user.role.Equals(Roles.ROLE_DOCTOR.ToString()))
+                                {
+                                    <td>Doctor</td>
+                                }
+                                else
+                                {
+                                    <td>Patient</td>
+                                }
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    
+    @Scripts.Render("~/Scripts/Swift-js/js/datatables/jquery.min.js")
+    @Scripts.Render("~/Scripts/Swift-js/js/datatables/jquery.dataTables.min.js")
+    @Scripts.Render("~/Scripts/Swift-js/js/datatables/dataTables.bootstrap4.min.js")
+    <script>
+
+        $('#dataGrid').dataTable({
+            processing: true,
+            filter: true,
+            orderMulti: true,
+            pageLength :20
+        });  
+    </script> 
+        
+}

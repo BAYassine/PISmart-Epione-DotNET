@@ -1,0 +1,301 @@
+﻿@using Newtonsoft.Json.Linq
+@using Domain.Entities
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/Doctor/_Layout.cshtml";
+    JObject data = (JObject)ViewData["dash_data"];
+    JArray jarray = (JArray)data.GetValue("appointments upcoming");
+    List<Appointment> appointments = jarray.ToObject<List<Appointment>>();
+}
+
+<h2>Dashboard</h2>
+<div class="row">
+    <div class="col-md-3">
+        <div class="info-box-2 bg-light-blue hover-zoom-effect">
+            <div class="icon">
+                <i class="material-icons">timer</i>
+            </div>
+            <div class="content">
+                <div class="text">Appointments take</div>
+                <div class="number">@data["average duration for consultations"]</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="info-box-2 bg-indigo hover-zoom-effect">
+            <div class="icon">
+                <i class="material-icons">insert_invitation</i>
+            </div>
+            <div class="content">
+                <div class="text">Appointments per day</div>
+                <div class="number">@(((float)data["average appointements per day"]).ToString("0.00"))</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="info-box-2 bg-blush hover-zoom-effect">
+            <div class="icon">
+                <i class="material-icons">access_alarm</i>
+            </div>
+            <div class="content">
+                <div class="text">Week Appointments</div>
+                <div class="number">@data["total appointments this week"]</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="info-box-2 bg-teal hover-zoom-effect">
+            <div class="icon">
+                <i class="material-icons">mail</i>
+            </div>
+            <div class="content">
+                <div class="text">Patients</div>
+                <div class="number">@data["total patients"]</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card patients_status">
+            <div class="header">
+                <h2>Schedule</h2>
+                <ul class="header-dropdown">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="zmdi zmdi-more-vert"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:void(0);">Action</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">Another action</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">Something else here</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                <div class="table-responsive table_middle">
+                    <table class="table mb-0">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Patient</th>
+                                <th>Description</th>
+                                <th>Start time</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Appointment app in appointments)
+                            {
+                                <tr>
+                                    <td>@app.id</td>
+                                    <td>
+                                        <img src="~/Content/images/team/team8.jpg" class="rounded-circle width30 m-r-15" alt="profile-image"><span>@app.patient.username</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-info">@app.message</span>
+                                    </td>
+                                    @{ DateTime date = (DateTime)app.date_start; }
+                                    <td>@date.ToShortTimeString()</td>
+                                    <td>
+                                        <a class="btn btn-small bg-light-blue waves-effect">Details</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card align-center">
+            <div class="header">
+                @{ Appointment ongoing = data["ongoing"].ToObject<Appointment>(); }
+                @if (ongoing != null && ongoing.state.Equals(Appointment.States.ONGOING))
+                {
+                    <h2>Ongoing appointment </h2>
+                }
+                else
+                {
+                    <h2>Next appointment</h2>
+                }
+            </div>
+            <div class="body">
+                @if (ongoing != null)
+                {
+                    <img class="circle-img mx-auto d-block" width="120" src="~/Content/images/project/2.jpg" />
+                    <h3>@ongoing.patient.username</h3>
+                    if (ongoing.state.Equals(Appointment.States.ONGOING))
+                    {
+                        @Html.ActionLink("End Appointment", "UpdateAppointment", new { id = ongoing.id, state = false }, new { @class = "btn bg-light-blue" })
+                        <a class="btn bg-light-blue">Details</a>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Start Appointment", "UpdateAppointment", new { id = ongoing.id, state = true }, new { @class = "btn bg-light-blue" })
+                    }
+                }
+                else
+                {
+                    <p>No more appointments for today</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="header">
+                <h2>Appontments history</h2>
+                <ul class="header-dropdown">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="zmdi zmdi-more-vert"></i>
+                        </a>
+                        <ul class="dropdown-menu float-right">
+                            <li>
+                                <a href="javascript:void(0);" onclick="showChart('day')">Days</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="showChart('month')">Months</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="showChart('year')">Years</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                <canvas class="chart" id="day_chart" height="100"></canvas>
+                <canvas class="chart" id="month_chart" height="100" style="display: none"></canvas>
+                <canvas class="chart" id="year_chart" height="100" style="display: none"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    JToken dayArray = (JToken)data["appointment per day"];
+    JToken monthArray = (JToken)data["appointment per month"];
+    JToken yearArray = (JToken)data["appointment per year"];
+    Dictionary<string, int> dayApps = dayArray.ToObject<Dictionary<string, int>>();
+    Dictionary<string, int> monthApps = monthArray.ToObject<Dictionary<string, int>>();
+    Dictionary<string, int> yearApps = yearArray.ToObject<Dictionary<string, int>>();
+}
+@section scripts
+{
+    @Scripts.Render("~/Scripts/moment.min.js")
+    <script>
+        var dayKeys = ("@String.Join(",", dayApps.Keys.ToList<string>())").split(",");
+        var monthKeys = ("@String.Join(",", monthApps.Keys.ToList<string>())").split(",");
+        var yearKeys = ("@String.Join(",", yearApps.Keys.ToList<string>())").split(",");
+        var dates = [];
+        var months = [];
+        var years = [];
+        dayKeys.forEach(function (element) {
+            dates.push(moment(element).format("dddd"));
+        });
+        monthKeys.forEach(function (element) {
+            months.push(moment(element).format("MMM"));
+        });
+        yearKeys.forEach(function (element) {
+            years.push(moment(element).format("YYYY"));
+        });
+        var ctxd = document.getElementById("day_chart").getContext('2d');
+        var ctxm = document.getElementById("month_chart").getContext('2d');
+        var ctxy = document.getElementById("year_chart").getContext('2d');
+        var dayChart = new Chart(ctxd, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'Appointments/Day',
+                    data: [@String.Join(",", dayApps.Values.ToArray())],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+        var monthChart = new Chart(ctxm, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Appointments/Month',
+                    data: [@String.Join(",", monthApps.Values.ToArray())],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+        var yearChart = new Chart(ctxy, {
+            type: 'bar',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Appointments/Year',
+                    data: [@String.Join(",", yearApps.Values.ToArray())],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+
+        function showChart(chart) {
+            $(".chart").css("display", "none");
+            $("#"+chart + "_chart").css("display", "block");
+        }
+    </script>
+}

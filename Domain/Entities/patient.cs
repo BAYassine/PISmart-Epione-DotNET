@@ -21,9 +21,6 @@ namespace Domain.Entities
 
         public int social_number { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Appointment> appointments { get; set; }
 

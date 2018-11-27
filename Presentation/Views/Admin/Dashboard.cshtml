@@ -1,0 +1,136 @@
+﻿@using Domain.Entities
+@using Newtonsoft.Json.Linq
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+    JObject data = (JObject)ViewData["dash_data"];
+}
+
+<h2>Dashboard</h2>
+
+<div class="row clearfix">
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="info-box-4 bg-blush hover-zoom-effect">
+            <div class="icon">
+                <i class="material-icons col-white">supervisor_account</i>
+            </div>
+            <div class="content">
+                <div class="text">Total users</div>
+                <div class="number">@data["Users"]</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="info-box-4 bg-blue hover-zoom-effect">
+            <div class="icon">
+                <i class="material-icons col-white">person_add</i>
+            </div>
+            <div class="content">
+                <div class="text">This Week subscriptions</div>
+                <div class="number">@data["Registred users this week"]</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="header">
+                <h2>Subscriptions</h2>
+            </div>
+            <div class="body">
+                <canvas class="chart" id="register_chart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="header">
+                <h2>Connections</h2>
+            </div>
+            <div class="body">
+                <canvas class="chart" id="login_chart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    JToken registerArray = (JToken)data["New subscribers per month"];
+    JToken connectionsArray = (JToken)data["Daily connections"];
+    Dictionary<string, int> registrations = registerArray.ToObject<Dictionary<string, int>>();
+    Dictionary<string, int> connections = connectionsArray.ToObject<Dictionary<string, int>>();
+}
+@section scripts
+{
+
+    @Scripts.Render("~/Scripts/moment.min.js")
+    <script>
+    var registerKeys = ("@String.Join(",", registrations.Keys.ToList<string>())").split(",");
+    var connectionKeys = ("@String.Join(",", connections.Keys.ToList<string>())").split(",");
+    var registerDates = [];
+    var connectionDates = [];
+    registerKeys.forEach(function (element) {
+        registerDates.push(moment(element).format("MMM"));
+    });
+    connectionKeys.forEach(function (element) {
+        connectionDates.push(moment(element).format("dddd"));
+    });
+    var ctxr = document.getElementById("register_chart").getContext('2d');
+    var ctxc = document.getElementById("login_chart").getContext('2d');
+    var registerChart = new Chart(ctxr, {
+        type: 'line',
+        data: {
+            labels: registerDates,
+            datasets: [{
+                label: 'Registrations/Month',
+                data: [@String.Join(",", registrations.Values.ToArray())],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+    var connectionChart = new Chart(ctxc, {
+        type: 'line',
+        data: {
+            labels: connectionDates,
+            datasets: [{
+                label: 'Connections/Day',
+                data: [@String.Join(",", connections.Values.ToArray())],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+}

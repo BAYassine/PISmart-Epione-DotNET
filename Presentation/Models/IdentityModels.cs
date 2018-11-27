@@ -21,7 +21,7 @@ namespace Presentation.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("EpioneContext", throwIfV1Schema: false)
         {
         }
 
@@ -29,5 +29,7 @@ namespace Presentation.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Presentation.Models.AccountVM> AccountVMs { get; set; }
     }
 }
