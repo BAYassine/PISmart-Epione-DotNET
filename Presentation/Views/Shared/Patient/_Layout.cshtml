@@ -9,7 +9,7 @@
 
 
     <!-- Favicon and Touch Icons -->
-    <link href="~/Content/images/favicon.png" rel="shortcut icon" type="image/png">
+    <link rel="icon" href="~/Content/images/favicon.png" type="image/x-icon">
     <link href="~/Content/images/apple-touch-icon.png" rel="icon">
     <link href="~/Content/images/apple-touch-icon-72x72.png" rel="icon" sizes="72x72">
     <link href="~/Content/images/apple-touch-icon-114x114.png" rel="icon" sizes="114x114">
@@ -110,21 +110,21 @@
         <div class="main-content">
             @RenderBody()
         </div>
+    </div>
+    @Scripts.Render("~/Scripts/Medikal-js/custom.js")
 
-        @Scripts.Render("~/Scripts/Medikal-js/custom.js")
-
-        <!-- SLIDER REVOLUTION 5.0 EXTENSIONS
-          (Load Extensions only on Local File Systems !
-           The following part can be removed on Server for On Demand Loading) -->
-        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.actions.min.js")
-        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.carousel.min.js")
-        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.kenburn.min.js")
-        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.layeranimation.min.js")
-        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.migration.min.js")
-        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.navigation.min.js")
-        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.parallax.min.js")
-        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.slideanims.min.js")
-        @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.video.min.js")
-        @RenderSection("scripts", required: false)
+    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS
+      (Load Extensions only on Local File Systems !
+       The following part can be removed on Server for On Demand Loading) -->
+    @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.actions.min.js")
+    @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.carousel.min.js")
+    @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.kenburn.min.js")
+    @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.layeranimation.min.js")
+    @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.migration.min.js")
+    @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.navigation.min.js")
+    @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.parallax.min.js")
+    @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.slideanims.min.js")
+    @Scripts.Render("~/Scripts/Medikal-js/revolution-slider/js/extensions/revolution.extension.video.min.js")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

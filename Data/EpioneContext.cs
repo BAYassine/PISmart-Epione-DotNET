@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Data
 {
     using System;
@@ -11,6 +13,7 @@ namespace Data
         public EpioneContext()
             : base("name=EpioneContext")
         {
+            Database.Log = sql => Debug.Write(sql);
         }
 
         public virtual DbSet<Appointment> appointments { get; set; }
@@ -58,10 +61,6 @@ namespace Data
                 .HasMany(e => e.reports)
                 .WithOptional(e => e.consultation)
                 .HasForeignKey(e => e.consultation_id);
-
-            modelBuilder.Entity<Doctor>()
-                .Property(e => e.location)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Doctor>()
                 .Property(e => e.presentation)

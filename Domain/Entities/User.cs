@@ -9,7 +9,7 @@ namespace Domain.Entities
     [Table("epione.user")]
     public partial class User
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(255)]
@@ -29,15 +29,11 @@ namespace Domain.Entities
         [StringLength(255)]
         public string username { get; set; }
 
-        public int? profile_id { get; set; }
-
         [Column(TypeName = "bit")]
         public bool confirmed { get; set; }
 
-        public virtual Doctor doctor { get; set; }
 
-        public virtual Patient patient { get; set; }
-
+        public int? profile_id { get; set; }
         public virtual Profile profile { get; set; }
     }
 }

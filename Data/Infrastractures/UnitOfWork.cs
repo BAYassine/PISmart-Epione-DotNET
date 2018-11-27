@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Formation.Data.Infrastructure;
+using Epione.Data.Infrastructure;
 
-namespace Formation.Data.Infrastructures
+namespace Epione.Data.Infrastructures
 {
     public class UnitOfWork : IUnitOfWork
     {

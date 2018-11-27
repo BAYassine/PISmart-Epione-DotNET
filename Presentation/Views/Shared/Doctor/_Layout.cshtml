@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>:: @ViewBag.Title - Doctor space ::</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/Content/images/favicon.png" type="image/x-icon">
     @Styles.Render("~/Content/Swift-css/plugins/bootstrap/css/bootstrap.min.css")
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css">
     @Styles.Render("~/Content/Swift-css/plugins/morrisjs/morris.css")
@@ -74,6 +74,8 @@
     @Scripts.Render("~/Scripts/Swift-js/bundles/mainscripts.bundle.js") <!-- Custom Js -->
     @Scripts.Render("~/Scripts/Swift-js/js/pages/index.js")
     @Scripts.Render("~/Scripts/Swift-js/js/pages/charts/sparkline.min.js")
+    @Scripts.Render("~/Scripts/site.js")
+    @RenderSection("scripts", false);
 </body>
 
 <!-- Mirrored from thememakker.com/templates/swift/hospital/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 10 Nov 2018 14:33:09 GMT -->

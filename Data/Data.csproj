@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.3.1.0\lib\net452\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -60,12 +63,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EpioneContext.cs" />
+    <Compile Include="Infrastractures\DataBaseFactory.cs" />
+    <Compile Include="Infrastractures\Disposable.cs" />
+    <Compile Include="Infrastractures\IDataBaseFactory.cs" />
+    <Compile Include="Infrastractures\IRepositoryBase.cs" />
+    <Compile Include="Infrastractures\IUnitOfWork.cs" />
+    <Compile Include="Infrastractures\RepositoryBase.cs" />
+    <Compile Include="Infrastractures\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configurations\" />
     <Folder Include="CustomConventions\" />
-    <Folder Include="Infrastractures\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

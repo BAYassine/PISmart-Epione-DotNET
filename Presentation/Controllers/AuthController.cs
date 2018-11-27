@@ -16,14 +16,14 @@ namespace Presentation.Controllers
     {
         static HttpClient client = new HttpClient();
 
-        public ActionResult Login(string returnUrl = "~/Home/Index")
+        public ActionResult Login(string returnUrl = null)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(string username, string password, string returnUrl)
+        public async Task<ActionResult> Login(string username, string password, string returnUrl = null)
         {
             var credtls = new Dictionary<string, string>();
             credtls.Add("username", username);
@@ -37,31 +37,40 @@ namespace Presentation.Controllers
             }
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", body);
             response = await client.GetAsync("http://localhost:18080/epione-jee-web/api/users");
+            Session["authtoken"] = body;
             if (response.IsSuccessStatusCode)
             {
-                JToken json = JToken.Parse(await response.Content.ReadAsStringAsync());
+                JToken json = JToken.Parse(response.Content.ReadAsStringAsync().Result);
                 if (json["role"].ToString() == "ROLE_PATIENT")
+                {
                     Session["user"] = json.ToObject<Patient>();
+                }
                 else if (json["role"].ToString() == "ROLE_DOCTOR")
                 {
                     Session["user"] = json.ToObject<Doctor>();
+                    if (returnUrl == null)
+                    {
+                        return RedirectToAction("Dashboard","Doctor");
+                    }
                 }
                 else
                 {
                     Session["user"] = json.ToObject<User>();
+                    if(returnUrl == null)
+                        return RedirectToAction("Dashboard", "Admin");
                 }
             }
-            Session["authtoken"] = body;
             return RedirectToLocal(returnUrl);
         }
 
         public ActionResult Logout()
         {
             Session.Remove("authtoken");
+            Session.Remove("user");
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult register()
+        public ActionResult Register()
         {
             return View();
         }
@@ -98,7 +107,7 @@ namespace Presentation.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index","Home");
         }
 
     }
