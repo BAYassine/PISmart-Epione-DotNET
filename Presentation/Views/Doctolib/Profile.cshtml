@@ -1,0 +1,304 @@
+﻿
+@{
+    ViewBag.Title = "Profile";
+    ViewBag.contentType = "profile-page";
+    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+}
+
+<div class="row clearfix">
+    <div class="col-md-12 p-l-0 p-r-0">
+        <section class="boxs-simple">
+            <div class="profile-header">
+                <div class="profile_info">
+                    <div class="profile-image"> <img src="@ViewBag.result.img" alt="profile-pic"> </div>
+                    <h4 class="mb-0"><strong>@ViewBag.result.name</strong></h4>
+                    <span class="text-muted col-white">@ViewBag.result.speciality</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+@if (ViewBag.result is Presentation.Models.DoctolibDoctorVM)
+{
+    <div class="row clearfix" style="margin-top: 25px">
+        <div class="col-lg-4 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Location</h2>
+                </div>
+                <div class="body">
+                    <!--map-->
+                    <script src='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+                    <link href='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+                    <style>
+                        #marker {
+                            background-image: url('@ViewBag.result.img');
+                            background-size: cover;
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            cursor: pointer;
+                        }
+
+                        .mapboxgl-popup {
+                            max-width: 200px;
+                        }
+                    </style>
+                    <div id='map' style='height: 300px;'></div>
+                    <script>
+                        function initmap() {
+                            mapboxgl.accessToken = 'pk.eyJ1IjoiY2FuY2lkYXMiLCJhIjoiY2pveThzczJxMjk0azNxbGgxcDJ3enE0ciJ9.6xUr69fkMw0vLHrpg4Hkuw';
+                            var map = new mapboxgl.Map({
+                                container: 'map',
+                                center: new mapboxgl.LngLat(@ViewBag.result.lng.ToString().Replace(",","."), @ViewBag.result.lat.ToString().Replace(",", ".")),
+                                zoom: 15,
+                                style: 'mapbox://styles/cancidas/cjoybojdy4dmp2spi5986j164'
+                            });
+
+                            var popup = new mapboxgl.Popup({ offset: 25 })
+                                .setText('@ViewBag.result.address');
+
+                            var el = document.createElement('div');
+                            el.id = 'marker';
+
+                            new mapboxgl.Marker(el)
+                                .setLngLat(new mapboxgl.LngLat(@ViewBag.result.lng.ToString().Replace(",","."), @ViewBag.result.lat.ToString().Replace(",", ".")))
+                                .setPopup(popup) // sets a popup on this marker
+                                .addTo(map);
+
+                            
+                        }
+
+                        initmap();
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Descprition</h2>
+                </div>
+                <div class="body">
+                    <p>
+                        @ViewBag.result.description
+                    </p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="header">
+                    <h2>Legal Information</h2>
+                </div>
+                <div class="body">
+                    <div class="row clearfix">
+                        @if (ViewBag.result.nbreRPPS != null)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingOne_1">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_1" aria-expanded="false" aria-controls="collapseOne_1" class="collapsed"> Number of RPPS </a> </h4>
+                                        </div>
+                                        <div id="collapseOne_1" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_1" style="">
+                                            <div class="panel-body">
+                                                @ViewBag.result.nbreRPPS
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (ViewBag.result.statuts != null)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="panel-group" id="accordion_2" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingOne_2">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_2" href="#collapseOne_2" aria-expanded="false" aria-controls="collapseOne_2" class="collapsed"> Status </a> </h4>
+                                        </div>
+                                        <div id="collapseOne_2" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_2" style="">
+                                            <div class="panel-body">
+                                                @ViewBag.result.statuts
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (ViewBag.result.nbreInscriptionOrdre != null)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="panel-group" id="accordion_3" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingOne_3">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_3" href="#collapseOne_3" aria-expanded="false" aria-controls="collapseOne_3" class="collapsed"> Number of Ordre Inscription </a> </h4>
+                                        </div>
+                                        <div id="collapseOne_3" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_3" style="">
+                                            <div class="panel-body">
+                                                @ViewBag.result.nbreInscriptionOrdre
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (ViewBag.result.nbreRCS != null)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="panel-group" id="accordion_4" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingOne_4">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_4" href="#collapseOne_4" aria-expanded="false" aria-controls="collapseOne_4" class="collapsed"> Number of RCS </a> </h4>
+                                        </div>
+                                        <div id="collapseOne_4" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_4" style="">
+                                            <div class="panel-body">
+                                                @ViewBag.result.nbreRPPS
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (ViewBag.result.membreAGA != null)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="panel-group" id="accordion_5" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingOne_5">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_5" href="#collapseOne_5" aria-expanded="false" aria-controls="collapseOne_5" class="collapsed"> Member of AGA </a> </h4>
+                                        </div>
+                                        <div id="collapseOne_5" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_5" style="">
+                                            <div class="panel-body">
+                                                @if (ViewBag.result.membreAGA)
+                                                {
+                                                    <span>Yes</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>No</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (ViewBag.result.formeJuridique != null)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="panel-group" id="accordion_6" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingOne_6">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_6" href="#collapseOne_6" aria-expanded="false" aria-controls="collapseOne_6" class="collapsed"> Juridique Forme </a> </h4>
+                                        </div>
+                                        <div id="collapseOne_6" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_6" style="">
+                                            <div class="panel-body">
+                                                @ViewBag.result.formeJuridique
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (ViewBag.result.adresseSocialeSiege != null)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="panel-group" id="accordion_7" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingOne_7">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_7" href="#collapseOne_7" aria-expanded="false" aria-controls="collapseOne_7" class="collapsed"> Social Siege Adresse </a> </h4>
+                                        </div>
+                                        <div id="collapseOne_7" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_7" style="">
+                                            <div class="panel-body">
+                                                @ViewBag.result.adresseSocialSiege
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (ViewBag.result.socialReason != null)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="panel-group" id="accordion_8" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingOne_8">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_8" href="#collapseOne_8" aria-expanded="false" aria-controls="collapseOne_8" class="collapsed"> Social Reason </a> </h4>
+                                        </div>
+                                        <div id="collapseOne_8" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_8" style="">
+                                            <div class="panel-body">
+                                                @ViewBag.result.socialReason
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (ViewBag.result.skills.Count > 0)
+                        {
+                            <div class="col-lg-8 col-md-12">
+                                <div class="panel-group" id="accordion_9" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingOne_9">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_8" href="#collapseOne_9" aria-expanded="false" aria-controls="collapseOne_9" class="collapsed"> Skills </a> </h4>
+                                        </div>
+                                        <div id="collapseOne_9" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_9" style="">
+                                            <div class="panel-body">
+                                                <ul class="list-group">
+                                                    @foreach (var elem in ViewBag.result.skills)
+                                                    {
+                                                        <li class="list-group-item">@elem</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row clearfix" style="margin-top: 25px">
+        @foreach (var elem in ViewBag.groups)
+        {
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="header">
+                    <h2>@elem.GroupName</h2>
+                </div>
+                <div class="body">
+                    <div class="row clearfix" >
+                        @foreach (var element in elem.Items)
+                        {
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="card all-patients">
+                                <div class="body">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4 text-center m-b-0">
+                                            <a href="@Url.Action("Profile", new { path = element.path })" class="p-profile-pix"><img src="@element.img" alt="user" class="img-thumbnail img-fluid"></a>
+                                        </div>
+                                        <div class="col-md-8 col-sm-8 m-b-0">
+                                            <h5 class="m-b-0">@element.name</h5> <small>@element.speciality</small>
+                                            <address class="m-b-0">
+                                                @element.address
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+}

@@ -174,7 +174,7 @@
 
     </section>
 
-    <section class="content home">
+    <section class="content @(ViewBag.contentType == null ? "home" : ViewBag.contentType)">
         <div class="container-fluid">
             @RenderBody()
         </div>
