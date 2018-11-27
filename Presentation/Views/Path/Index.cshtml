@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Paths";
+    Layout = "~/Views/Shared/Doctor/_Layout.cshtml";
+}
+
+
+
+
+ <div class="main-content">
+
+     <section>
+         <div class="container">
+             <div class="row">
+                 <div class="col-md-12">
+                     <h4 class="title">Basic example</h4>
+                   
+
+
+
+          
+
+                         <div class="body table-responsive">
+                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                 <thead>
+                                     <tr>
+                                         <th>id</th>
+                                         <th>desc</th>
+                                         <th>Edit</th>
+
+
+                                     </tr>
+                                 </thead>
+
+                                 <tbody>
+
+                                     @foreach (var p in @ViewBag.result)
+                                     {
+                                         <tr>
+                                             <th scope="row" >@p.id</th>
+                                             <td>@p.description</td>
+                                           
+                                           
+                                             <td>@Html.ActionLink("Consult treatments", "Edit", new { id = p.id , description = p.description})</td>
+
+
+
+
+                                         </tr>
+
+                                     }
+
+
+
+                                 </tbody>
+
+                             </table>
+
+
+                         </div>
+                     </div>
+             </div>
+         </div>
+         </section>
+     </div>
+
+
+
+
+
+
+
+

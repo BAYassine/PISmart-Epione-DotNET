@@ -212,12 +212,19 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeMedController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PathController.cs" />
+    <Compile Include="Controllers\TreatmentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PathVM.cs" />
+    <Compile Include="Models\PathVM2.cs" />
+    <Compile Include="Models\PatientVM.cs" />
+    <Compile Include="Models\ProfileVM.cs" />
+    <Compile Include="Models\TreatmentVM.cs" />
     <Compile Include="Models\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -349,6 +356,8 @@
     <Content Include="Scripts\Swift-js\bundles\mainscripts.bundle.js" />
     <Content Include="Scripts\Swift-js\bundles\sparklinescripts.bundle.js" />
     <Content Include="Scripts\Swift-js\bundles\vendorscripts.bundle.js" />
+    <Content Include="Scripts\Swift-js\js\pages\jquery-nestable.css" />
+    <Content Include="Scripts\Swift-js\js\pages\jquery.nestable.js" />
     <Content Include="Scripts\Swift-js\js\morphing.js" />
     <Content Include="Scripts\Swift-js\js\pages\calendar\calendar.js" />
     <Content Include="Scripts\Swift-js\js\pages\cards\basic.js" />
@@ -358,6 +367,7 @@
     <Content Include="Scripts\Swift-js\js\pages\forms\editors.js" />
     <Content Include="Scripts\Swift-js\js\pages\index.js" />
     <Content Include="Scripts\Swift-js\js\pages\maps\jvectormap.js" />
+    <Content Include="Scripts\Swift-js\js\pages\sortable-nestable.js" />
     <Content Include="Scripts\Swift-js\js\pages\tables\jquery-datatable.js" />
     <Content Include="Scripts\Swift-js\js\pages\ui\animations.js" />
     <Content Include="Scripts\Swift-js\js\pages\ui\dialogs.js" />
@@ -413,6 +423,13 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Views\Auth\Greeting.cshtml" />
+    <Content Include="Views\Path\Index.cshtml" />
+    <Content Include="Views\Path\Create.cshtml" />
+    <Content Include="Views\Treatment\Index.cshtml" />
+    <Content Include="Views\Treatment\Create.cshtml" />
+    <Content Include="Views\Path\Edit.cshtml" />
+    <Content Include="Views\Path\AddTreatment.cshtml" />
+    <Content Include="Views\Path\chooseTreat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
