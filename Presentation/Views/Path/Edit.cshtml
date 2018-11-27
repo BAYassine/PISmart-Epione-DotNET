@@ -6,7 +6,7 @@
 }
 
 
-<h2>Edit</h2>
+<h2>List of treatment(s)</h2>
 
 <div class="main-content">
 
@@ -14,9 +14,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4 class="title">Basic example</h4>
+                    <h4 class="title">Path reference : @ViewBag.Message </h4>
     
-                  Path Description :   @ViewBag.Message
+                  
 
 
 
@@ -24,8 +24,10 @@
                         <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                             <thead>
                                 <tr>
-                                    <th>id</th>
-                                    <th>desc</th>
+                                    
+                                    <th>Description</th>
+                                    <th>Recomended Doctor</th>
+                                    <th>Action</th>
 
 
                                 </tr>
@@ -36,9 +38,10 @@
                                 @foreach (var p in @ViewBag.result)
                                 {
                                     <tr>
-                                        <th scope="row">@p.id</th>
+                                        
                                         <td>@p.description</td>
-
+                                        <td>@p.recomended_doc</td>
+                                        <td> <a href="@Url.Action("DeleteTreat","Path",new { id = p.id })" class="btn  btn-raised btn-danger waves-effect">Delete</a></td>
                                        
 
 
@@ -53,71 +56,19 @@
                             </tbody>
                            
                         </table>
-                        @Html.ActionLink("add treatment", "AddTreatment", new { iddd = ViewBag.PathId })
+                        @Html.ActionLink("add new treatment", "AddTreatment", new { iddd = ViewBag.PathId }, new { @class = "btn  btn-raised g-bg-cyan waves-effect" })
+                        @Html.ActionLink("Copy existent treatments", "chooseTreat", new { pathid = ViewBag.PathId, desc = ViewBag.Message }, new { @class = "btn  btn-raised g-bg-cyan waves-effect" })
 
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <div class="col-lg-6 col-md-12 col-sm-12">
-        <div class="card">
-            <div class="header">
-                <h2> DEFAULT EXAMPLE <small>Drag & drop hierarchical list with mouse and touch compatibility</small> </h2>
-                <ul class="header-dropdown">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another action</a></li>
-                            <li><a href="javascript:void(0);">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="body">
-                <div class="clearfix m-b-20">
-                    <div class="dd ">
-                        <ol class="dd-list">
-                            
-                            <li class="dd-item" data-id="@ViewBag.PathId">
-                                <div class="dd-handle">Path :  @ViewBag.Message</div>
-                                <ol class="dd-list nestable-dark-theme">
-                                  @foreach (var p in @ViewBag.result)
-                                  {
-                                   
-                                        <li class="dd-item" data-id="@p.id">
-                                            <div class="dd-handle">@p.description</div>
-
-                                        </li>
-
-                                    
-
-
-                                  }
-                                  
-                                    </ol>
-                                </li>
-                                    
-                        </ol>
-                    </div>
-                </div>
-                <b>Output JSON</b>
-                <textarea cols="30" rows="3" name="js" class="form-control no-resize" readonly></textarea>
-            </div>
-           
-        </div>
-    </div>
-   
-    <!-- #END# Default Example --> 
+  
 </div>
 
 
-@section NesTable
-{
-    @Scripts.Render("~/Scripts/Swift-js/js/pages/jquery.nestable.js")
-    @Scripts.Render("~/Scripts/Swift-js/js/pages/sortable-nestable.js")
-}
+
 
 
 
