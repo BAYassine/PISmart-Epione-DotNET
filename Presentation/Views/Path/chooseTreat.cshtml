@@ -1,0 +1,125 @@
+﻿@model Presentation.Models.TreatmentVM
+
+@{
+    ViewBag.Title = "Choose Treat";
+    Layout = "~/Views/Shared/Doctor/_Layout.cshtml";
+
+}
+
+<h2>Add Treatments</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Copy existent treatments to Path : @ViewBag.Message </h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
+        <div class="row clearfix">
+            <div class="card col-lg-6">
+                <div class="header">
+                    <h2> Selected Path </h2>
+                    <ul class="header-dropdown">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);">Action</a></li>
+                                <li><a href="javascript:void(0);">Another action</a></li>
+                                <li><a href="javascript:void(0);">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <input type="text" name="name" value="@ViewBag.PathId" hidden />                <div class="body">
+                    <div class="clearfix m-b-20">
+                        <div class="dd ">
+                            <ol class="dd-list">
+
+                                <li class="dd-item" data-id=@ViewBag.PathId name="ddd" lll="ddd">
+                                    <div class="dd-handle">Path :  @ViewBag.Message</div>
+                                    <ol class="dd-list nestable-dark-theme">
+
+                                    </ol>
+                                </li>
+
+                            </ol>
+                        </div>
+
+                       
+                    </div>
+
+                    
+                    <textarea cols="30" rows="3" name="test" class="form-control no-resize" hidden></textarea>
+                             <div class="form-group">
+                               <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Copy" class="btn  btn-raised g-bg-cyan btn-block btn-lg waves-effect" />
+                               </div>
+                             </div>
+                </div>
+
+            </div>
+
+            <div class="card col-lg-6">
+                <div class="header">
+                    <h2> List of existent treatments <small>Drag & drop treatments under the path</small> </h2>
+                    <ul class="header-dropdown">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);">Action</a></li>
+                                <li><a href="javascript:void(0);">Another action</a></li>
+                                <li><a href="javascript:void(0);">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="clearfix m-b-20">
+                        <div class="dd ">
+                            <ol class="dd-list">
+
+
+
+                                <ol class="dd-list">
+                                    @foreach (var p in @ViewBag.result)
+                                    {
+
+                                        <li class="dd-item" data-id="@p.id" >
+                                            <div class="dd-handle">@p.description</div>
+
+                                        </li>
+
+
+
+
+                                    }
+
+                                </ol>
+
+                            </ol>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+           
+        </div>
+
+      
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section NesTable
+{
+    @Scripts.Render("~/Scripts/Swift-js/js/pages/jquery.nestable.js")
+    @Scripts.Render("~/Scripts/Swift-js/js/pages/sortable-nestable.js")
+}

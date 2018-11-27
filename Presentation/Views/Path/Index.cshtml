@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Paths";
+    Layout = "~/Views/Shared/Doctor/_Layout.cshtml";
+}
+
+
+
+
+ <div class="main-content">
+
+     <section>
+         <div class="container">
+             <div class="row">
+                 <div class="col-md-12">
+                     <h4 class="title">List of Paths</h4>
+                   
+
+
+
+          
+
+                         <div class="body table-responsive">
+                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                 <thead>
+                                     <tr>
+                                         
+                                         <th>Description</th>
+                                         <th>Date</th>
+                                         <th>Action</th>
+
+
+                                     </tr>
+                                 </thead>
+
+                                 <tbody>
+
+                                     @foreach (var p in @ViewBag.result)
+                                     {
+                                         <tr>
+                                             
+                                             <td>@p.description</td>
+                                             <td>@p.date_path</td>
+                                           
+                                           
+                                             <td>@Html.ActionLink("Consult treatments", "Edit", new { id = p.id , description = p.description},new { @class = "btn  btn-raised g-bg-cyan waves-effect" })
+                                                 <a href="@Url.Action("Delete","Path",new { id = p.id })" class="btn  btn-raised btn-danger waves-effect">Delete</a>
+                                             </td>
+                                             
+
+
+
+
+
+                                         </tr>
+
+                                     }
+
+
+
+                                 </tbody>
+
+                             </table>
+
+
+                         </div>
+                     </div>
+             </div>
+         </div>
+         </section>
+     </div>
+
+
+
+
+
+
+
+

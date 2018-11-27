@@ -1,0 +1,126 @@
+﻿@model Presentation.Models.PathVM
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/Doctor/_Layout.cshtml";
+}
+
+        <div class="block-header">
+            <h2>Add Path</h2>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Basic Information  </h2>
+                       
+                    </div>
+                    <div class="body">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                  
+                                    <div class="form-line">
+                                       <!-- <input type="text" class="form-control" placeholder="First Name">-->
+                                   @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", @placeholder = "description" } })
+                                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                                      
+                                     </div> 
+                                    <div class="form-line">
+                                        <!-- <input type="text" class="form-control" placeholder="First Name">-->
+                                        @Html.EditorFor(model => model.date_path, new { htmlAttributes = new { @class = "form-control", @placeholder = "date_path", @type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.date_path, "", new { @class = "text-danger" })
+
+                                    </div> 
+                                </div>
+                                <section >
+                               
+
+
+
+                                                <div class="body table-responsive">
+                                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>id</th>
+                                                                <th>Firstname</th>
+                                                                <th>Lastname</th>
+                                                                <th>Birth Date</th>
+                                                                <th>Gender</th>
+                                                                <th>Address</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var p in @ViewBag.result)
+                                                            {
+                                                                <tr class="unread">
+                                                                    <td>
+                                                                        <div class="col-sm-12">
+                                                                            <button type="submit" class="btn btn-raised g-bg-cyan" href="@Url.Action("create","Path")">affect</button>
+
+                                                                        </div>
+
+                                                                    </td>
+                                                                    <td class="max-texts">
+                                                                        <input type="text" name="idSelected" value="@p.id" hidden />
+                                                                    </td>
+                                                                    <td class="max-texts">
+                                                                        @p.firstname
+                                                                    </td>
+                                                                    <td class="max-texts">
+                                                                        @p.lastname
+                                                                    </td>
+                                                                    <td class="max-texts">
+                                                                        @p.birthDate
+                                                                    </td>
+                                                                    <td class="max-texts">
+                                                                        @p.gender
+                                                                    </td>
+                                                                    <td class="max-texts">
+                                                                        @p.address
+                                                                    </td>
+
+
+                                                                </tr>
+
+                                                            }
+
+
+
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            
+                                </section>
+                            </div>
+           
+                        </div>
+
+                     
+}
+                    </div>
+              
+
+                </div>
+            </div>
+    
+
+        
+        </div>
+   
+
+
+
+
+
+
+
+    
+

@@ -30,6 +30,12 @@ namespace Presentation.Models
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<Presentation.Models.PathVM> PathVMs { get; set; }
+
+        public System.Data.Entity.DbSet<Presentation.Models.TreatmentVM> TreatmentVMs { get; set; }
+
+        public System.Data.Entity.DbSet<Presentation.Models.ReportVM> ReportVMs { get; set; }
+
         public System.Data.Entity.DbSet<Presentation.Models.AccountVM> AccountVMs { get; set; }
     }
 }

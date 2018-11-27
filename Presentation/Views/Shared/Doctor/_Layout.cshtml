@@ -13,6 +13,8 @@
     @Styles.Render("~/Content/Swift-css/plugins/morrisjs/morris.css")
     <!-- Custom Css -->
     @Styles.Render("~/Content/Swift-css/css/main.css")
+
+    @Styles.Render("~/Scripts/Swift-js/js/pages/jquery-nestable.css")
 </head>
 <body class="theme-blue">
     <!-- Page Loader -->
@@ -74,8 +76,14 @@
     @Scripts.Render("~/Scripts/Swift-js/bundles/mainscripts.bundle.js") <!-- Custom Js -->
     @Scripts.Render("~/Scripts/Swift-js/js/pages/index.js")
     @Scripts.Render("~/Scripts/Swift-js/js/pages/charts/sparkline.min.js")
-    @Scripts.Render("~/Scripts/site.js")
-    @RenderSection("scripts", false);
+
+
+    @Scripts.Render("~/Scripts/Swift-js/bundles/datatablescripts.bundle.js")<!-- Jquery DataTable Plugin Js -->
+    @Scripts.Render("~/Scripts/Swift-js/js/pages/tables/jquery-datatable.js")
+    @Scripts.Render("~/Scripts/Swift-js/js/pages/ui/modals.js")
+
+    @RenderSection("NesTable", required: false)
+
 </body>
 
 <!-- Mirrored from thememakker.com/templates/swift/hospital/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 10 Nov 2018 14:33:09 GMT -->

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Doctor/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<div class="main-content">
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="title">List of Paths</h4>
+
+
+
+
+
+
+                    <div class="body table-responsive">
+                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                            <thead>
+                                <tr>
+
+                                    <th>Content</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var p in @ViewBag.result)
+                                {
+                                    <tr>
+
+                                        <td>@p.content</td>
+                                        <td>@p.date_rep</td>
+
+
+                                        <td>
+                                            @Html.ActionLink("PDF", "Generate", new { idreport = p.id }, new { @class = "btn  btn-raised g-bg-cyan waves-effect" })
+                                        <a href="@Url.Action("Generate","Report",new { idreport = p.id })" class="btn  btn-raised btn-danger waves-effect">Delete</a>
+                                    </td>
+
+
+
+
+
+
+                                </tr>
+
+                                }
+
+
+
+                            </tbody>
+
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

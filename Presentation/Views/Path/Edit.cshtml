@@ -1,0 +1,83 @@
+﻿@model Presentation.Models.PathVM
+
+@{
+    ViewBag.Title = "Path'treatments";
+    Layout = "~/Views/Shared/Doctor/_Layout.cshtml";
+}
+
+
+<h2>List of treatment(s)</h2>
+
+<div class="main-content">
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="title">Path reference : @ViewBag.Message </h4>
+    
+                  
+
+
+
+                    <div class="body table-responsive">
+                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Description</th>
+                                    <th>Recomended Doctor</th>
+                                    <th>Action</th>
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var p in @ViewBag.result)
+                                {
+                                    <tr>
+                                        
+                                        <td>@p.description</td>
+                                        <td>@p.recomended_doc</td>
+                                        <td> <a href="@Url.Action("DeleteTreat","Path",new { id = p.id })" class="btn  btn-raised btn-danger waves-effect">Delete</a></td>
+                                       
+
+
+
+
+                                    </tr>
+
+                                }
+
+
+
+                            </tbody>
+                           
+                        </table>
+                        @Html.ActionLink("add new treatment", "AddTreatment", new { iddd = ViewBag.PathId }, new { @class = "btn  btn-raised g-bg-cyan waves-effect" })
+                        @Html.ActionLink("Copy existent treatments", "chooseTreat", new { pathid = ViewBag.PathId, desc = ViewBag.Message }, new { @class = "btn  btn-raised g-bg-cyan waves-effect" })
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
