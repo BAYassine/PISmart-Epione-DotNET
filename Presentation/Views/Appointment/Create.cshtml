@@ -9,7 +9,7 @@
 <script src="../../Scripts/Medikal-js/bootstrap.min.js"></script>
 <link href="../../Content/Medikal-css/bootstrap-theme.min.css" rel="stylesheet" />
 
-    <section id="home" class="divider bg-lighter">
+    @*<section id="home" class="divider bg-lighter">
         <center>
             <div class="bg-lightest border-1px p-25">
 
@@ -25,10 +25,10 @@
                             <div class="form-group mb-10">
                              
                                   @Html.TextBoxFor(m => m.doctor_id, htmlAttributes: new { id = "idD", @class = "", @placeholder = @ViewBag.doctorid })
-                                @Html.TextBoxFor(m => m.doctor.name, htmlAttributes: new { name = "name", @class = "", @disabled = "disabled", @placeholder = @ViewBag.doctorname })
+                                @Html.TextBoxFor(m => m.doctor.name, htmlAttributes: new { name = "name", @class = "", @disabled = "disabled", @placeholder = @ViewBag.doctorname })*@
                                 @*@Html.DropDownListFor(m => m.r,m => m.re, "-- Select a speciality --")*@
                                 
-                            </div>
+                            @*</div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group mb-10">
@@ -39,20 +39,20 @@
                         </div>
                        
                         <div class="col-sm-12">
-                            <div class="form-group mb-10">
+                            <div class="form-group mb-10">*@
                                 @*<input name="form_appontment_date" class="form-control required date-picker" type="text" placeholder="Appoinment Date" aria-required="true">*@
-                                @Html.TextBoxFor(m => m.date_start, htmlAttributes: new { @class = "datepicker" })
+                                @*@Html.TextBoxFor(m => m.date_start, htmlAttributes: new { @class = "datepicker" })
                              </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group mb-10">
 
-                                @Html.TextAreaFor(m => m.message, htmlAttributes: new { @class = "form-control", @placeholder = "Enter Message" })
+                                @Html.TextAreaFor(m => m.message, htmlAttributes: new { @class = "form-control", @placeholder = "Enter Message" })*@
                           
                                 @*<input class="datepicker" type="text" name="date"><br>
                                 <input type="text">
                                 <input type="submit" value="click" name="click" onclick="affiche()">**@
-                             </div>
+                             @*</div>
                         </div>
 
                     <div class="form-group mb-0 mt-20">
@@ -60,19 +60,19 @@
                         <button type="submit" class="btn btn-dark btn-theme-colored" onclick="afficherMsg(@ViewBag.result)" data-loading-text="Please wait...">Add Appointment</button>
                     </div>
                         </div>
-              }
+              }*@
                 <!-- Appointment Form Validation-->
-                <script type="text/javascript">
+                @*<script type="text/javascript">
                     $("#appointment_form").validate({
                         submitHandler: function (form) {
                             var form_btn = $(form).find('button[type="submit"]');
-                            var form_result_div = '#form-result';
-                            $(form_result_div).remove();
-                            form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
-                            var form_btn_old_msg = form_btn.html();
-                            form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
-                            $(form).ajaxSubmit({
-                                dataType: 'json',
+                            var form_result_div = '#form-result';*@
+                            @*//$(form_result_div).remove();
+                            //form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
+                            //var form_btn_old_msg = form_btn.html();
+                            //form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
+                            //$(form).ajaxSubmit({*@
+                                @*dataType: 'json',
                                 success: function (data) {
                                     if (data.status == 'true') {
                                         $(form).find('.form-control').val('');
@@ -87,7 +87,83 @@
                 </script>
                 </div>
 </center>
-    </section>
+    </section>*@
+
+
+
+
+<section id="Appoinment" data-bg-img="../Content/images/pattern/p4.png">
+    <div class="container pt-50 pb-0">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="p-10">
+                    <h2 class="mt-0 line-bottom line-height-1 text-black mb-30">Make An Appoinment<span class="text-theme-colored font-weight-600"> Now!</span></h2>
+
+
+                  @using (Html.BeginForm("Create", "Appointment", FormMethod.Post, new { @class = "reservation-form" }))
+                  {
+                                  @Html.AntiForgeryToken()
+
+                                  <div class="row">
+                                      @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="col-sm-12">
+                                <div class="form-group mb-30">
+
+                                    @Html.HiddenFor(m => m.doctor_id, htmlAttributes: new { id = "idD", @class = "", @placeholder = @ViewBag.doctorid })
+
+
+                                    @Html.TextBoxFor(m => m.doctor.name, htmlAttributes: new { name = "name", @class = "form-control", @disabled = "disabled", @placeholder = @ViewBag.doctorname, @style = "background:white; width:529px;" })
+                                    @*@Html.DropDownListFor(m => m.r,m => m.re, "-- Select a speciality --")*@
+                                    @* <input style="width:529px" placeholder="Enter Name" type="text" id="reservation_name" name="reservation_name" required="" class="form-control">*@
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group mb-30">
+                                    <div class="styled-select">
+                                        @Html.DropDownList("reason_id", (SelectList)ViewData["reason_id"],"-- SELECT REASON --",new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group mb-30">
+
+                                    @* <input name="reservation_date" class="form-control required date-picker" type="text" placeholder="Reservation Date" aria-required="true">*@
+                                    @Html.TextBoxFor(m => m.date_start, htmlAttributes: new { @class = "datepicker form-control" })
+                                  
+                                   </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group mb-30">
+                                    @*  <textarea style="width:529px" id="form_message" name="form_message" class="form-control required" placeholder="Enter Message" rows="5" aria-required="true"></textarea>*@
+                                    @Html.TextAreaFor(m => m.message, htmlAttributes: new { @class = "form-control", @placeholder = "Enter Message", @style = "background:white; width:529px;" })
+
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group mb-0 mt-0">
+                                    <input name="form_botcheck" class="form-control" type="hidden" value="">
+                                    @* <button type="submit" class="btn btn-theme-colored btn-lg btn-block" data-loading-text="Please wait...">Submit Now</button>*@
+                                    <button type="submit" class="btn btn-dark btn-theme-colored" onclick="afficherMsg(@ViewBag.result)" data-loading-text="Please wait...">Add Appointment</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    }
+
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="../Content/images/about/4.png" alt="">
+            </div>
+
+        </div>
+    </div>
+</section>
+
 <script>
     function afficheMsg(msg) {alert (msg); }
 var disabledtimes_mapping = ["11/24/2018:8", "11/24/2018:17", "11/26/2018:15:30"];
@@ -105,6 +181,21 @@ function formatDate(datestr)
     return month+"/"+day+"/"+date.getFullYear();
 
 }
+$('.datepicker').on('pick.datetimepicker', function (e) {
+
+    var currentdate = new Date();
+
+    // add a day
+    currentdate.setDate(currentdate.getDate() - 1);
+
+    if (e.date < currentdate) {
+        e.preventDefault(); // Prevent to pick the date
+        alert("Please choose a valid date !");
+
+
+    }
+
+});
 
 $(".datepicker").datetimepicker({
 timeFormat: 'HH:mm:ss',

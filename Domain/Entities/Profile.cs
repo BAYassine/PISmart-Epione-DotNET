@@ -27,8 +27,8 @@ namespace Domain.Entities
          
         public string firstname { get; set; }
 
-        public int gender { get; set; }
-
+        public string gender { get; set; }
+        public string image { get; set; }
         [Required]
          
         public string lastname { get; set; }

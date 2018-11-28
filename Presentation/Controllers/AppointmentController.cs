@@ -8,8 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Mail;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,8 @@ namespace Presentation.Controllers
 {
     public class AppointmentController : Controller
     {
+        IAppointmentService serv = new AppointmentService();
+        int i = 8;
         // GET: Appointment
         public ActionResult Index()
         {
@@ -33,17 +37,56 @@ namespace Presentation.Controllers
         {
             return View();
         }
+       public ActionResult PreviousAppointment()
+        {
+            HttpClient Client = new HttpClient();
+            Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = Client.GetAsync("http://localhost:18080/epione-jee-web/api/Appointment").Result;
+            var result = response.Content.ReadAsAsync<IEnumerable<AppointmentVM>>().Result;
+            DateTime today = DateTime.Today;
+            List<AppointmentVM> l1 = new List<AppointmentVM>();
+            foreach(AppointmentVM a in result){
+                DateTime ds = Convert.ToDateTime(a.date_start);
+                if (DateTime.Compare(ds,today) < 0)
+                {
+                    l1.Add(a);
+                }
+            }
+            
+                ViewBag.previousAppointment = l1;
+                return View();
+        }
+        public ActionResult UpcomingAppointment()
+        {
+            HttpClient Client = new HttpClient();
+            Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = Client.GetAsync("http://localhost:18080/epione-jee-web/api/Appointment").Result;
+            var result = response.Content.ReadAsAsync<IEnumerable<AppointmentVM>>().Result;
+            DateTime today = DateTime.Today;
+            ViewBag.date = today;
+            List<AppointmentVM> l2 = new List<AppointmentVM>();
+            foreach (AppointmentVM a in result)
+            {
+                DateTime ds = Convert.ToDateTime(a.date_start);
+                if (DateTime.Compare(ds, today) > 0)
+                {
+                    l2.Add(a);
+                }
+            }
+
+            ViewBag.upcomingAppointments = l2;
+            return View();
+        }
         // GET: Appointment/Patient
         public async Task<ActionResult> AppointmentByPatient()
         {
             HttpClient Client = new HttpClient();
-          
             Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
             Client.DefaultRequestHeaders. Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = Client.GetAsync("http://localhost:18080/epione-jee-web/api/Appointment").Result;
-     
             var result =response.Content.ReadAsAsync<IEnumerable<AppointmentVM>>().Result;
-            System.Diagnostics.Debug.WriteLine("********* state ******* "+result.ElementAt<AppointmentVM>(0).state);
             ViewBag.appointment = result;
 
             return View();
@@ -62,7 +105,25 @@ namespace Presentation.Controllers
             var response = await Client.SendAsync(request);
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             System.Diagnostics.Debug.WriteLine("******************okkk:" + request.Content);
-
+            int ca = 0;
+            var canceledAp = serv.GetMany(c => c.patient.id == i);
+            foreach(Appointment app in canceledAp)
+            {
+                if (app.state==0){ ca++;}
+            }
+            if(ca>=2)
+            {
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("oumayma.habouri@gmail.com")); //replace with valid value
+                message.Subject = "Canceled Appointments";
+                message.Body = string.Format("You have canceled more than 2 appointment please answer this form ...");
+                message.IsBodyHtml = true;
+                using (var smtp = new SmtpClient())
+                {
+                    await smtp.SendMailAsync(message);
+                    return RedirectToAction("AppointmentByPatient");
+                }
+            }
             if (response.IsSuccessStatusCode)
             {
               
@@ -73,7 +134,7 @@ namespace Presentation.Controllers
             {
                 ViewData["canceled"] = "erreur";
             }
-            return RedirectToAction("AppointmentByPatient");
+            return RedirectToAction("AppointmentByPatient", new { c = ViewBag.canceledApp });
         }
         // GET: Appointment/Create
         public ActionResult Create()
@@ -89,20 +150,11 @@ namespace Presentation.Controllers
 
             Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
             //User currentUser = (User)Session["authtoken"];
-            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-           
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));   
             AppointmentVM a = new AppointmentVM();
-            Model.reason_id = 4;
-            System.Diagnostics.Debug.WriteLine("********* From form******* " + Model.date_start);
-            //string s = DateTime.ParseExact(Model.date_start, "yyyy-MM-dd HH:mm:ss", null).ToString();
-            //System.Diagnostics.Debug.WriteLine("********* conveeert******* " + s);
-            // s.Replace("T", " ");
-            //s =s.Replace("/","-");
             string date = String.Concat(Model.date_start, ":00");
             a.date_start = date;
-        
-            string st = "1";
-            a.state = st;
+            a.state = "1";
             a.doctor = new Doctor();
             System.Diagnostics.Debug.WriteLine("********* Daaaaaate******* " + a.date_start);
             a.doctor.id = Model.doctor_id;
@@ -123,8 +175,19 @@ namespace Presentation.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-               ViewBag.success = "Added with success !";
-                return RedirectToAction("AppointmentByPatient");
+               
+                ViewBag.success = "Added with success !";
+              
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("oumayma.habouri@gmail.com")); //replace with valid value
+                message.Subject = "Appointment confirmation";
+                message.Body = string.Format("Your appointment on "+Model.date_start+" has been confirmed");
+                message.IsBodyHtml = true;
+                using (var smtp = new SmtpClient())
+                {
+                    await smtp.SendMailAsync(message);
+                    return RedirectToAction("AppointmentByPatient");
+                }
 
             }
             else
@@ -147,17 +210,6 @@ namespace Presentation.Controllers
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = Client.GetAsync("http://localhost:18080/epione-jee-web/api/Reason/SearchReasonsByDoctor?idDoctor="+ doctor_id).Result;
             var result = response.Content.ReadAsAsync<List<Reason>>().Result;
-            //List<SelectListItem> lst = new List<SelectListItem>();
-            //foreach(Reason r in  result)
-            //{
-            //    lst.Add(new SelectListItem()
-            //    {
-            //        Value = r.id.ToString(),
-            //        Text = r.name
-            //    });
-            //}
-            //AppointmentVM Model = new AppointmentVM();
-            //Model.reasonList = lst;
             ViewBag.doctorname = name;
             ViewBag.doctorid = doctor_id;
             ViewData["reason_id"] = new SelectList(result, "id", "name");
@@ -166,26 +218,59 @@ namespace Presentation.Controllers
             return View();
         }
 
-        // GET: Appointment/Edit/5
+        // GET: Appointment/Edit
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            HttpClient Client = new HttpClient();
+
+            Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = Client.GetAsync("http://localhost:18080/epione-jee-web/api/Appointment?id="+id).Result;
+            AppointmentVM app = response.Content.ReadAsAsync<AppointmentVM>().Result;
+       
+            System.Diagnostics.Debug.WriteLine("********* update app : app doc******* " + app.doctor.name);
+            HttpResponseMessage response2= Client.GetAsync("http://localhost:18080/epione-jee-web/api/Reason/SearchReasonsByDoctor?idDoctor=" + app.doctor.id).Result;
+            var reasons = response2.Content.ReadAsAsync<List<Reason>>().Result;
+            ViewBag.doctorname1 = app.doctor.name;
+            ViewData["reason"] = new SelectList(reasons, "id", "name");
+            return View(app);
         }
 
         // POST: Appointment/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(AppointmentVM app)
         {
-            try
-            {
-                // TODO: Add update logic here
+            HttpClient Client = new HttpClient();
+            Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var request = new HttpRequestMessage(HttpMethod.Put,"http://localhost:18080/epione-jee-web/api/Appointment");
+            request.Content = new StringContent("{}", Encoding.UTF8, "application/json");
+            app.reason = new Reason() { id = app.reason_id };
+            string date = String.Concat(app.date_start, ":00");
+            app.date_start = date;
+            app.state = "1";
+            var json = JsonConvert.SerializeObject(app);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response =await Client.SendAsync(request);
+         
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            System.Diagnostics.Debug.WriteLine("****************** app updated i*****");
+
+            if (response.IsSuccessStatusCode)
             {
+
+                System.Diagnostics.Debug.WriteLine("******************okkk:" + response.StatusCode);
+                return RedirectToAction("AppointmentByPatient");
+            }
+            else
+            {
+                ViewData["updated"] = "erreur";
                 return View();
             }
+            
         }
 
         // GET: Appointment/Delete/5

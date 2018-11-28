@@ -1,0 +1,78 @@
+﻿
+@using Presentation.Models
+@{
+    ViewBag.Title = "Details";
+}<!-- Section: Doctor Details -->
+<section class="">
+    <div class="container">
+        <div class="section-content">
+            <div class="row">
+                <div class="col-sx-12 col-sm-4 col-md-4">
+                    <div class="doctor-thumb">
+                        <img src=@ViewBag.patient.profile.image alt="">
+                    </div>
+                    <ul class="styled-icons icon-gray text-center mt-15 mb-15">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    </ul>
+                   
+                    <div class="mt-30">
+                        <h4></h4>
+                        <div class="owl-carousel-1col" data-dots="true">
+                            <div class="item">
+                                <div class="testimonial style1">
+                                    <div class="comment">
+                                        <p>I'am capable of making healthy & positive decisions today</p>
+                                    </div>
+                                    
+                                 
+                                </div>
+                            </div>
+                         
+                            <div class="item">
+                                <div class="testimonial style1">
+                                    <div class="comment">
+                                        <p>Lorem ipsum dolor sit ametconse ctetur adipisicing elitvolup tatem error sit qui dolorem facilis.</p>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-8 pl-20 pl-sm-15">
+                    <div>
+                        <h3 class="mt-0">@ViewBag.patient.profile.firstname @ViewBag.patient.profile.lastname   </h3>
+                        <h5 class="text-theme-colored">MBBS (Sydney), FRACS (Paediatric Surgery)</h5>
+                        <p>Suite 27, The Sunshine Coast Private Hospital</p>
+                        <hr>
+                        <p class="">After graduating from West Virginia University Medical School, Dr. Jonathon Alex completed a two-year fellowship in sports medicine at Akron Children’s Hospital. During his training at Akron, Dr. Jonathon Alex was team physician for the University of Akron and Walsh University a two-year fellowship in sports medicine at Akron Children’s Hospital. During his training at Akron.</p>
+                    </div>
+                    <div class="mt-30">
+                        <h4 class="text-uppercase">Specialties & Qualifications</h4>
+                        <h5>Specialtiy: <span class="text-theme-colored">Endocrinology</span></h5>
+                        <p>Specialty of medicine; some would say a sub-specialty of internal medicine, which deals with the diagnosis and treatment of diseases related to hormones. </p>
+                        <h5>Specialtiy: <span class="text-theme-colored">Paediatric Medicine</span></h5>
+                        <p>Specialty of medicine; some would say a sub-specialty of internal medicine, which deals with the diagnosis and treatment of diseases related to hormones. </p>
+                        <h4 class="mt-30 text-uppercase">Education & Medical Training</h4>
+                        <ul class="list theme-colored angle-double-right m-0">
+                            <li class="mt-0"><strong>Doctor of Medicine</strong><br> University of Texas, USA (1990)</li>
+                            <li><strong>Medical Orientation Program</strong><br> St. Louis University (St. Louis, Missouri 1996)</li>
+                        </ul>
+                     
+                        <h4 class="mt-30 text-uppercase">Certifications</h4>
+                        <ul class="list theme-colored angle-double-right m-0">
+                            <li class="mt-0"><strong>American Board of Psychiatry and Neurology</strong><br> Certified in Psychiatry</li>
+                            <li><strong>MA State Medical License</strong><br> Active through 2016</li>
+                        </ul>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

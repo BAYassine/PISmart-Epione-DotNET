@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,28 +20,29 @@ namespace Presentation.Controllers
       
 
         // GET: Patient/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details()
         {
-        //    HttpClient Client = new HttpClient();
-        //    IEnumerable<PatientVM> list;
-        //    System.Diagnostics.Debug.WriteLine("******************specialit :" + model.speciality_id);
-           
+            HttpClient Client = new HttpClient();
+          
+            Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
 
-        //    Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        //    HttpResponseMessage response = await Client.GetAsync("http://localhost:18080/epione-jee-web/api/Doctor?idS=" + model.speciality_id + "&lon=" + model.longitude + "&lat=" + model.latitude + "&name=" + model.name);
-        //    // HttpResponseMessage response = await Client.GetAsync("http://localhost:18080/epione-jee-web/api/Doctor?idS=1&lon=5&lat=5&name=oumayma");
-        //    System.Diagnostics.Debug.WriteLine("http://localhost:18080/epione-jee-web/api/Doctor?idS=" + model.speciality_id + "&lon=" + model.longitude + "&lat=" + model.latitude + "&name=" + model.name);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        list = await response.Content.ReadAsAsync<IEnumerable<PatientVM>>();
-        //        System.Diagnostics.Debug.WriteLine("******************DOCTOR LIST LENGTH :" + list.Count());
-        //        ViewData["appoi"] = list;
-        //    }
-        //    else
-        //    {
-        //        ViewBag.result = "erreur";
-        //    }
-            return View();
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = Client.GetAsync("http://localhost:18080/epione-jee-web/api/users").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                PatientVM patient = await response.Content.ReadAsAsync<PatientVM>();
+              
+                ViewBag.patient = patient;
+                return View();
+            }
+            else
+            {
+                ViewBag.result = "erreur";
+                return View();
+            }
+           
+          
         }
 
         // GET: Patient/Create

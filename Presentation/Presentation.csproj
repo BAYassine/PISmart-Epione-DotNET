@@ -389,9 +389,13 @@
     <Content Include="Views\Doctor\SearchDoctor.cshtml" />
     <Content Include="Views\Appointment\AppointmentByPatient.cshtml" />
     <Content Include="Views\Appointment\CancelAppointment.cshtml" />
-    <Content Include="Views\Notification\_GetNotifications.cshtml" />
-    <Content Include="Views\Notification\GetNotifications.cshtml" />
     <Content Include="Views\Appointment\Create.cshtml" />
+    <Content Include="Views\Notification\GetNotifications.cshtml" />
+    <Content Include="Views\Appointment\Edit.cshtml" />
+    <Content Include="Views\Appointment\EditSave.cshtml" />
+    <Content Include="Views\Patient\Details.cshtml" />
+    <Content Include="Views\Appointment\PreviousAppointment.cshtml" />
+    <Content Include="Views\Appointment\UpcomingAppointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

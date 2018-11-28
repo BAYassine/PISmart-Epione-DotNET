@@ -1,23 +1,21 @@
-﻿@model IEnumerable<Presentation.Models.AppointmentVM>
+﻿ @model IEnumerable<Presentation.Models.AppointmentVM>
 @using Presentation.Models
 
 @{
         ViewBag.Title = "AppointmentByPatient";
 }
-@if (@ViewBag.success!=null) { 
-    <script type="text/javascript">
-        window.onload = function () {
-            alert("@ViewBag.success");
-        };
-    </script>
- } 
+<script  type="text/javascript">
+    var dialogue_title = document.title;
+    dialogue_title = "oumayma";
+    alert('aaa'+c);
+</script>
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="orders">
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Doctor</th>
+                        <th>Doctor </th>
                         <th>Address</th>
                         <th>Date</th>
                         <th>Reason</th>
@@ -49,38 +47,37 @@
                                 <td>@item.message</td>
 
                                 <td>@item.state</td>
-@using (Html.BeginForm("CancelAppointment", "Appointment", new { id = @item.id }, FormMethod.Post))
+                            @if (item.state =="UPCOMING")
+                            {
+using (Html.BeginForm("CancelAppointment", "Appointment", new { id = item.id }, FormMethod.Post))
 {
     <td>  <input type="submit" class="btn btn-danger btn-flat"  @*ata-toggle="modal" data-target=".bs-example-modal-lg"*@ value="Cancel" /></td>
 
 
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                ...
-                <div class="modal-footer">
-@*@using (Html.BeginForm("AppointmentByPatient", "Appointment", new { id = @item.id }, FormMethod.Post)) { 
-                    <input type="text" name="ida" id="idA" hidden /> 
-                    <input type="submit" class="btn btn-dark btn-flat" value="YES" />@item.id
-                    <button type="button" class="btn btn-default" data-dismiss="modal">NO</button> }*@
-
-                </div>
-            </div>
-
-        </div>
-      
-    </div>
+                                }
 
 
+                                using (Html.BeginForm("Edit", "Appointment", FormMethod.Get))
+                                {
+                                    <input type="hidden" name="id" value="@item.id" />
+                                    <td><input type="submit" class="btn btn-success btn-flat" value="Update" /></td>
+                                }
+                            }
+                            else
+                            {
 
-}
-                            <td><a class="btn btn-success" href="#">update</a></td>
+
+    <td>  <input type="submit" class="btn btn-danger btn-flat" @*ata-toggle="modal" data-target=".bs-example-modal-lg"*@ value="Cancel" disabled="disabled" /></td>
+    <td><input type="submit" class="btn btn-success btn-flat" value="Update" disabled="disabled" /></td>
+
+
+                            }
                             </tr>
                     }
 
 
                        
-                    </tr>
+                   
                     </tbody>
                 </table>
                 </div>

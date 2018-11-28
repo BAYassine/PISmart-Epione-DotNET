@@ -26,11 +26,13 @@ namespace Presentation.Controllers
         // GET: Notification/Patient
         public async Task<ActionResult> GetNotifications()
         {
+            System.Diagnostics.Debug.WriteLine("****Get notiif****** ");
             HttpClient Client = new HttpClient();
             Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = Client.GetAsync("http://localhost:18080/epione-jee-web/api/notification/show").Result;
             var result = response.Content.ReadAsAsync<IEnumerable<NotificationVM>>().Result;
+            System.Diagnostics.Debug.WriteLine("****Get notiif count****** :"+result.Count());
             ViewBag.notification = result;
 
             return View();

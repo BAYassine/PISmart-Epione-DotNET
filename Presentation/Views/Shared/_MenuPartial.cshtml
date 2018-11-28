@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Domain.Entities.Patient>
+﻿
 @using Domain.Entities;
 <link rel="stylesheet" type="text/css" href="~/Content/assests/style.css" />
 <link rel="stylesheet" type="text/css" href="~/Content/assests/nanoscroller.css"/>
@@ -9,27 +9,33 @@
         <ul class="menuzord-menu">
             <li class="active">
                 <a href="#home">Home</a>
+               
+            </li>
+            <li>
+                @Html.ActionLink("My Profile", "Details", "Patient")
+            </li>
+            <li class="">
+             @Html.ActionLink("My Appointments", "AppointmentByPatient", "Appointment")
                 <ul class="dropdown">
                     <li>
-                        <a href="#">Multi Page Layouts</a>
-                        <ul class="dropdown">
-                            <li><a href="index-mp-layout1.html">Layout1</a></li>
-                        </ul>
+                        <a href="#">@Html.ActionLink("Previous Appointments", "PreviousAppointment", "Appointment")</a>
+                       
+                    </li>
+                    <li>
+                        <a href="#">@Html.ActionLink("Upcoming Appointments", "UpcomingAppointment", "Appointment")</a>
+
                     </li>
                 </ul>
             </li>
-            <li class="">
-                @Html.ActionLink("My Appointments", "AppointmentByPatient", "Appointment") 
+          
+            <li>
                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">  <i class="fa fa-bell facebook"></i> <span class="indicator"></span></a>
                 <ul class="dropdown-menu am-notifications">
                     @Html.ActionLink("My Notifications", "GetNotifications", "Notification")
-                    
+                  
                 </ul>
-                <span class="indicator"><a href="" class="icon icon-white icon-bordered icon-rounded icon-border-effect effect-roundedd"><i class="fa fa-facebook"></i></a></span>
-            </li>
-            <li >
-       
                 </li>
+          
                 </ul>
                 }
                 else
@@ -37,14 +43,7 @@
                 <ul class="menuzord-menu">
                     <li class="active">
                         <a href="#home">Home</a>
-                        <ul class="dropdown">
-                            <li>
-                                <a href="#">Multi Page Layouts</a>
-                                <ul class="dropdown">
-                                    <li><a href="index-mp-layout1.html">Layout1</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                     
                     </li>
                 </ul>
                 }

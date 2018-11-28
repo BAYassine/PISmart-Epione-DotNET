@@ -59,7 +59,7 @@
                                                     <h4 class="media-heading text-uppercase font-weight-500">Dr. @item.name</h4>
                                                     <p>@item.presentation olj,goesdgpm,jpmrsodmg,j qekfpqke^pkespk ^p;lg^pkesgok esgfpkeù^pgk</p>
                                                     @*@Html.ActionLink("Make an Appointment", "Create", "Appointment")*@
-                                                 @using (Html.BeginForm("Create", "Appointment",FormMethod.Get))
+                                                 @using (Html.BeginForm("Create", "Appointment", FormMethod.Get))
                                                  {
                                                      <input type="hidden" name="doctor_id" value="@item.id"/>
                                                     <input type="hidden" name="name" value="@item.name" />
@@ -82,10 +82,15 @@
                                         </div>
                                     </div>
 
+                                    }
                                 }
-                            }
+                                else {
+                                <h2>There is no doctor .</h2>
+                                }
 
-                      
+
+
+
                         </div>
                         <div class="col-md-3">
                             <div class="sidebar sidebar-right mt-sm-30">

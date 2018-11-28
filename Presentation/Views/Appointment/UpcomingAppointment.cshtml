@@ -1,0 +1,96 @@
+﻿
+
+@model IEnumerable<Presentation.Models.AppointmentVM>
+@using Presentation.Models
+@{
+    ViewBag.Title = "UpcomingAppointment";
+}
+
+<script type="text/javascript">
+    var dialogue_title = document.title;
+    dialogue_title = "oumayma";
+    alert('aaa'+c);
+</script>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="orders">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Doctor </th>
+                        <th>Address</th>
+                        <th>Date</th>
+                        <th>Reason</th>
+                        <th>Message</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.upcomingAppointments != null)
+                    {
+                        foreach (var item in ViewBag.upcomingAppointments)
+                        {
+
+                            <tr>
+
+                                <td>
+                                    @item.doctor.name
+
+                                </td>
+                                <td>
+                                    @item.doctor.address
+
+                                </td>
+                                <td>
+                                    @item.date_start
+                                </td>
+
+                                <td> @item.reason.name</td>
+
+                                <td>@item.message</td>
+                                <td>@item.state</td>
+                                @if (item.state == "UPCOMING")
+                                {
+                                    using (Html.BeginForm("CancelAppointment", "Appointment", new { id = item.id }, FormMethod.Post))
+                                    {
+                                        <td>  <input type="submit" class="btn btn-danger btn-flat" @*ata-toggle="modal" data-target=".bs-example-modal-lg"*@ value="Cancel" /></td>
+
+
+                                    }
+
+
+                                    using (Html.BeginForm("Edit", "Appointment", FormMethod.Get))
+                                    {
+                                        <input type="hidden" name="id" value="@item.id" />
+                                        <td><input type="submit" class="btn btn-success btn-flat" value="Update" /></td>
+                                    }
+                                }
+                                else
+                                {
+
+
+                                    <td>  <input type="submit" class="btn btn-danger btn-flat" @*ata-toggle="modal" data-target=".bs-example-modal-lg"*@ value="Cancel" disabled="disabled" /></td>
+                                    <td><input type="submit" class="btn btn-success btn-flat" value="Update" disabled="disabled" /></td>
+
+
+                                }
+                            </tr>
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        <tr> No appointments.</tr>
+                    }
+
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

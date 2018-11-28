@@ -10,6 +10,7 @@ namespace Presentation.Models
     {
         public int social_number { get; set; }
         public int id { get; set; }
+        public virtual Profile profile { get; set; }
         public virtual ICollection<Appointment> appointments { get; set; }
         public virtual ICollection<Message> messages { get; set; }
         public virtual ICollection<Notificationapp> notificationapps { get; set; }
