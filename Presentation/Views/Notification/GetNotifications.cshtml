@@ -4,26 +4,33 @@
 @using Presentation.Models
 
 
-<h2>GetNotifications</h2>
+<section id="cd-timeline2" class="cd-timeline-simple cd-container">
+@foreach (NotificationVM item in ViewBag.notification)
+{
+    <div class="cd-timeline-block">
+        <div class="cd-timeline-img cd-picture">
+            <img src="~/Content/images/notif.png" alt="Movie">
+        </div> <!-- cd-timeline-img -->
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Content </th>
-            <th>Date</th></tr>
-            @foreach (NotificationVM item in ViewBag.notification)
-            {
+        <div class="cd-timeline-content text-right flip pr-0">
+            <h2 class="mt-0"></h2>
+            <p style="color: black">@item.content</p>
+            <span class="cd-date" style="color: #00a3c8; font-weight:bold">@item.notified_at</span>
+        </div> <!-- cd-timeline-content -->
+    </div> <!-- cd-timeline-block -->
 
-            <tr>
+    <div class="cd-timeline-block">
+        <div class="cd-timeline-img cd-movie">
+            <img src="~/Content/images/notif.png" alt="Movie">
+        </div> <!-- cd-timeline-img -->
 
-                <td>
-                    @item.content
+        <div class="cd-timeline-content pl-0">
+            <h2 class="mt-0"></h2>
+            <p style="color: black">@item.content</p>
+            <span class="cd-date" style="color: #00a3c8; font-weight:bold">@item.notified_at</span>
+        </div> <!-- cd-timeline-content -->
+    </div> <!-- cd-timeline-block -->
 
-                </td>
-                <td>
-                    @item.notified_at
-
-            </td>
-        </tr>
-            }
-
+}
+        </section>
+  
