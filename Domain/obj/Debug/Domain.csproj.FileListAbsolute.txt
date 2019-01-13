@@ -1,5 +1,0 @@
-C:\Users\oumayma\git\PISmart-Epione-DotNET\Domain\bin\Debug\Domain.dll
-C:\Users\oumayma\git\PISmart-Epione-DotNET\Domain\bin\Debug\Domain.pdb
-C:\Users\oumayma\git\PISmart-Epione-DotNET\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
-C:\Users\oumayma\git\PISmart-Epione-DotNET\Domain\obj\Debug\Domain.dll
-C:\Users\oumayma\git\PISmart-Epione-DotNET\Domain\obj\Debug\Domain.pdb
