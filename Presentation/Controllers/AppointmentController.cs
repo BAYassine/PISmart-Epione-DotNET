@@ -106,7 +106,7 @@ namespace Presentation.Controllers
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             System.Diagnostics.Debug.WriteLine("******************okkk:" + request.Content);
             int ca = 0;
-            var canceledAp = serv.GetMany(c => c.patient.id == i);
+            var canceledAp = serv.GetMany(c => c.patient.Id == i);
             foreach(Appointment app in canceledAp)
             {
                 if (app.state==0){ ca++;}
@@ -159,7 +159,7 @@ namespace Presentation.Controllers
             System.Diagnostics.Debug.WriteLine("********* Daaaaaate******* " + a.date_start);
             a.doctor.id = Model.doctor_id;
             a.patient = new Patient();
-            a.patient.id = 8;
+            a.patient.Id = 8;
             a.patient_id = 8;
             a.message = Model.message;
             a.reason = new Reason() { id = Model.reason_id };
@@ -273,26 +273,26 @@ namespace Presentation.Controllers
             
         }
 
-        // GET: Appointment/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //// GET: Appointment/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: Appointment/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //// POST: Appointment/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

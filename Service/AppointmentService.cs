@@ -1,4 +1,4 @@
-﻿using Data.Infrastructures;
+﻿using Epione.Data.Infrastructures;
 using Domain.Entities;
 using Service.Pattern;
 using System;
@@ -19,7 +19,7 @@ namespace Service
         }
         public int CountCanceledAppointment(int id)
         {
-            return GetMany(c => c.patient.id==id).Count();
+            return GetMany(c => c.patient.Id==id).Count();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Data;
 
-namespace Epione.Data.Infrastructure
+namespace Epione.Data.Infrastructures
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {//new()

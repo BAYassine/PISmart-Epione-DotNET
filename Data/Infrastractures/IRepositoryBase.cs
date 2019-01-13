@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Epione.Data.Infrastructure
+namespace Epione.Data.Infrastructures
 {
     public interface IRepositoryBase<T> where T : class
     {
