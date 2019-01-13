@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Epione.Data.Infrastructures
 {
-    public class Disposable:IDisposable
+    public class Disposable : IDisposable
     {
 
         #region IDisposable Support

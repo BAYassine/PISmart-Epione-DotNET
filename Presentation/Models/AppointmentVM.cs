@@ -9,6 +9,10 @@ namespace Presentation.Models
 {
     public class AppointmentVM
     {
+        public enum States
+        {
+            CANCELED, UPCOMING, ONGOING, DONE
+        }
         public int id { get; set; }
         //public int reasonId { get; set; }
         //public List<SelectListItem> reasonList { get; set; }

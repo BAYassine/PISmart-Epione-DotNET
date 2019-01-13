@@ -1,4 +1,6 @@
-﻿using Presentation.Models;
+﻿using Domain.Entities;
+using Presentation.Models;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +14,54 @@ namespace Presentation.Controllers
 {
     public class NotificationController : Controller
     {
-        // GET: Notification
-        public ActionResult Index()
+        INotificationService ins;
+
+        public NotificationController()
         {
-            return View();
+            ins = new NotificationService();
         }
 
-        // GET: Notification/Details/5
-        public ActionResult Details(int id)
+        // GET: Notification
+        public ActionResult Index(string searchString)
         {
-            return View();
+            var listnotification = ins.GetMany();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                listnotification = ins.GetMany(m => m.content.Contains(searchString));
+            }
+            var films = new List<NotificationMV>();
+            foreach (Notificationapp f in listnotification)
+            {
+                films.Add(new NotificationMV()
+                {
+                    content = f.content,
+                    confirmation = f.confirmation,
+                    new_Appointement_Date=f.new_Appointement_Date,
+                    notified_at=f.notified_at,
+                    patientnotif_id=f.patientnotif_id   
+                });
+            }
+            return View(films);
         }
-        // GET: Notification/Patient
+
+        //// POST: Notification/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
+
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
+       // GET: Notification/Patient
         public async Task<ActionResult> GetNotifications()
         {
             System.Diagnostics.Debug.WriteLine("****Get notiif****** ");
