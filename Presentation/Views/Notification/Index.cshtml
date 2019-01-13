@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Presentation.Models.NotificationMV>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>
+                <div>
+                    Search by title: @Html.TextBox("searchString")
+                </div>
+            </td>
+            <td>
+                <input type="submit" value="Search" id="submit" />
+            </td>
+        </tr>
+    </table>
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.confirmation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.new_Appointement_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.notified_at)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.patientnotif_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.content)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.confirmation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.new_Appointement_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.notified_at)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.patientnotif_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.content)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

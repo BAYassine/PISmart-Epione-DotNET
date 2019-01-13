@@ -21,15 +21,16 @@ namespace Presentation.Controllers
 
             using (var client = new HttpClient())
             {
+                
                 //Passing service base url  
                 client.BaseAddress = new Uri(Baseurl);
 
                 client.DefaultRequestHeaders.Clear();
                 //Define request data format  
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
                 //Sending request to find web api REST service resource doList using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync("epione-jee-web/api/rating/get");
+                HttpResponseMessage Res = await client.GetAsync("epione-jee-web/api/rating/patient/"+ Session["username"]);
 
                 //Checking the response is successful or not which is sent using HttpClient  
                 if (Res.IsSuccessStatusCode)
@@ -54,24 +55,68 @@ namespace Presentation.Controllers
         }
 
         // GET: Rating/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            using (var client = new HttpClient())
+            {
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+                //Sending request to find web api REST service resource doList using HttpClient  
+                HttpResponseMessage Res =  client.GetAsync("epione-jee-web/api/Appointment").Result;
+
+                //Checking the response is successful or not which is sent using HttpClient  
+               
+                    //Storing the response details recieved from web api   
+                    var Response = Res.Content.ReadAsAsync<IEnumerable<AppointmentVM>>().Result;
+                    System.Diagnostics.Debug.WriteLine("****apppp****"+ Response.ElementAt<AppointmentVM>(0).id);
+                    //Deserializing the response recieved from web api and storing into the users list  
+                    List<SelectListItem> myList = new List<SelectListItem>();
+                    foreach (var item in Response)
+                    {
+                        SelectListItem s = new SelectListItem() { Text = item.message , Value =(item.id).ToString() };
+                        myList.Add(s);
+                    }
+
+                    ViewBag.list = myList;
+             
+                //returning the employee list to view
+                return View();
+            }
         }
 
         // POST: Rating/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(RatingWithAppVM rvm)
         {
-            try
+            using (var client = new HttpClient())
             {
-                // TODO: Add insert logic here
+                CreatRatingVM rvm2 = new CreatRatingVM() { rate = rvm.rate, comment = rvm.comment };
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
 
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+                //Sending request to find web api REST service resource doList using HttpClient  
+                HttpResponseMessage Res = await client.PostAsJsonAsync<CreatRatingVM>("epione-jee-web/api/rating/add/"+int.Parse(rvm.id_appointment), rvm2);
+
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var Response = Res.Content.ReadAsStringAsync().Result;
+
+                    //Deserializing the response recieved from web api and storing into the users list  
+
+                }
+                //returning the employee list to view
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
             }
         }
 
@@ -98,25 +143,30 @@ namespace Presentation.Controllers
         }
 
         // GET: Rating/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
-        }
-
-        // POST: Rating/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            if (Session["authtoken"] == null)
+                return RedirectToAction("Login", "Auth");
+            using (var client = new HttpClient())
             {
-                // TODO: Add delete logic here
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.DeleteAsync("epione-jee-web/api/rating/" + id);
+            
+                if (Res.IsSuccessStatusCode)
+                {
+                    var stockResponse = Res.Content.ReadAsStringAsync().Result;
+                    //String j = JsonConvert.DeserializeObject<String>(stockResponse);
 
+                }
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
             }
         }
     }
+        
+
+      
 }
+    
+

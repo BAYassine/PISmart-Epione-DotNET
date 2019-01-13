@@ -5,16 +5,17 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Data;
 
-namespace Formation.Data.Infrastructure
+namespace Epione.Data.Infrastructure
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {//new()
-   
-        private FormationContext dataContext;
+
+        private EpioneContext dataContext;
         private readonly IDbSet<T> dbset; // générique
 
-        public RepositoryBase(FormationContext dataContext)
+        public RepositoryBase(EpioneContext dataContext)
         {
             this.dataContext = dataContext;
             dbset = dataContext.Set<T>();// set ; remplit la variable dbset avec T
@@ -52,7 +53,7 @@ namespace Formation.Data.Infrastructure
         //    return dbset.ToList();
         //}
 
-        public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where = null, 
+        public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where = null,
             Expression<Func<T, bool>> orderBy = null)
         {
             IEnumerable<T> Query1 = dbset;
@@ -70,8 +71,8 @@ namespace Formation.Data.Infrastructure
         public T Get(Expression<Func<T, bool>> where)
         {
             return dbset.Where(where).FirstOrDefault<T>();
-        } 
-        
+        }
+
 
     }
 }

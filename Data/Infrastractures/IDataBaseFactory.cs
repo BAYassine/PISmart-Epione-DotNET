@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data;
 
-namespace Formation.Data.Infrastructures
+namespace Epione.Data.Infrastructures
 {
-    public interface IDataBaseFactory :IDisposable
+    public interface IDataBaseFactory : IDisposable
     {
-       FormationContext DataContext { get;  }
+        EpioneContext DataContext { get; }
     }
 }

@@ -5,9 +5,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Epione.Data.Infrastructure
+namespace Service.Pattern
 {
-    public interface IRepositoryBase<T> where T : class
+    public interface INotificationService<T> : IDisposable where T : class
     {
         void Add(T entity);
         void Delete(Expression<Func<T, bool>> condition);
@@ -19,5 +19,7 @@ namespace Epione.Data.Infrastructure
         IEnumerable<T> GetMany(Expression<Func<T, bool>> condition = null,
             Expression<Func<T, bool>> orderBy = null);
         void Update(T entity);
+        void Commit();
+        //void Dispose(); hidden
     }
 }

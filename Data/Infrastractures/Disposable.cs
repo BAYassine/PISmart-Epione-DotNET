@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Formation.Data.Infrastructures
+namespace Epione.Data.Infrastructures
 {
-    public class Disposable:IDisposable
+    public class Disposable : IDisposable
     {
 
         #region IDisposable Support

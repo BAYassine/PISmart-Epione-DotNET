@@ -3,7 +3,71 @@
     ViewBag.Title = "Messenger";
 }
 
-<style>
+<div class="container">
+    <h3 class=" text-center">Messaging</h3>
+    <h1>@ViewBag.MyString.username</h1>
+    <div class="messaging">
+        <div class="inbox_msg">
+            <div class="inbox_people">
+                <div class="headind_srch">
+                    <div class="recent_heading">
+                        <h4>Recent</h4>
+                    </div>
+                    <div class="srch_bar">
+                        <div class="stylish-input-group">
+                            <input type="text" class="search-bar" placeholder="Search">
+                            <span class="input-group-addon">
+                                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="inbox_chat">
+                    <div class="chat_list active_chat">
+                        <div class="chat_people">
+                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                            <div class="chat_ib">
+                                <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                <p>
+                                    Test, which is a new approach to have all solutions
+                                    astrology under one roof.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat_list">
+                        <div class="chat_people">
+                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                            <div class="chat_ib">
+                                <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                <p>
+                                    Test, which is a new approach to have all solutions
+                                    astrology under one roof.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mesgs">
+                <div id="discussion"class="msg_history">
+                    <input type="hidden" id="displayname" value="@ViewBag.MyString.username"/>
+                </div>
+                <div class="type_msg">
+                    <div class="input_msg_write">
+                        <input id="message" type="text" class="write_msg" placeholder="Type a message" />
+                        <button id="sendmessage" class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <p class="text-center top_spac"> Design by <a target="_blank" href="#">Sunil Rajput</a></p>
+
+    </div>
+</div>
+@*<style>
     div.panel-body {
         overflow: scroll;
         background: url('http://subtlepatterns.com/patterns/geometry2.png');
@@ -33,8 +97,14 @@
             </span>
         </div>
     </div>
-</div>
+</div>*@
+
 @section scripts {
+     <link rel="stylesheet" href="~/Content/css/style.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+<link href="~/Content/css/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+@*<script src="~/Content/css/js/bootstrap.min.js"></script>
+<script src="~/Content/css/js/jquery-3.3.1.js"></script>*@
     <!--Script references. -->
     <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
     <!--Reference the SignalR library. -->
@@ -48,19 +118,18 @@
             var chat = $.connection.chatHub;
             // Create a function that the hub can call back to display messages.
             chat.client.addNewMessageToPage = function (name, message) {
-                if (name == "Atir") {
+
+                if (name == $('#displayname').val()) {
                     // Add the message to the page.
-                    $('#discussion').append('<p style="color:green; text-align:left; width:500px"><strong><img = src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_7.png" title="Atir">'
-                        + ' </strong> ' + htmlEncode(message) + '</p>');
+                    $('#discussion').append('<div  class="outgoing_msg"><div class="sent_msg"><p>'+htmlEncode(message)+'</p><span class="time_date"> 11:01 AM    |    Today</span></div></div>');
                 }
-                else if (name != "Atir") {
+                else {
                     // Add the message to the page.
-                    $('#discussion').append('<p style="color:blue;text-align:right;"><strong><img = src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_71.png" title="Peter">'
-                        + ' </strong> ' + htmlEncode(message) + '</p>');
+                    $('#discussion').append('<div class="incoming_msg"><div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div><div class="received_msg"><div class="received_withd_msg"><p>' + htmlEncode(message) + '</p><span class="time_date"> 11:01 AM    |    Today</span></div></div></div>');
                 }
             };
             // Get the user name and store it to prepend to messages.
-            $('#displayname').val(prompt('Enter your name:', ''));
+            @*$('#displayname').val(@ViewBag.MyString.username);*@
             // Set initial focus to message input box.
             $('#message').focus();
             // Start the connection.

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
+using Domain.Entities;
 
 namespace Presentation.Controllers
 {
@@ -38,6 +39,7 @@ namespace Presentation.Controllers
             response = await client.GetAsync("http://localhost:18080/epione-jee-web/api/users");
             if (response.IsSuccessStatusCode)
             {
+                Session["username"] = username;
                 JToken json = JToken.Parse(await response.Content.ReadAsStringAsync());
                 if (json["role"].ToString() == "ROLE_PATIENT")
                     Session["user"] = json.ToObject<Patient>();

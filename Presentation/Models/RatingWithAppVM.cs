@@ -5,8 +5,9 @@ using System.Web;
 
 namespace Presentation.Models
 {
-    public class RatingVM
+    public class RatingWithAppVM
     {
+
         public int id { get; set; }
 
         public string comment { get; set; }
@@ -15,6 +16,6 @@ namespace Presentation.Models
 
         public int rate { get; set; }
 
-
+        public string id_appointment { get; set; }
     }
 }

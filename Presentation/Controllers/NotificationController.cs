@@ -1,36 +1,60 @@
-﻿using System;
+﻿using Domain.Entities;
+using Presentation.Models;
+using Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Presentation.Controllers
 {
-    public class MessengerController : Controller
+    public class NotificationController : Controller
     {
-        // GET: Messenger
-        public ActionResult Messenger()
+        INotificationService ins;
+
+        public NotificationController()
         {
-            if (Session["authtoken"] == null)
-                return RedirectToAction("Login", "Auth");
-            ViewBag.MyString = Session["user"];
-            return View();
+            ins = new NotificationService();
         }
 
-        // GET: Messenger/Details/5
+        // GET: Notification
+        public ActionResult Index(string searchString)
+        {
+            var listnotification = ins.GetMany();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                listnotification = ins.GetMany(m => m.content.Contains(searchString));
+            }
+            var films = new List<NotificationMV>();
+            foreach (Notificationapp f in listnotification)
+            {
+                films.Add(new NotificationMV()
+                {
+                    content = f.content,
+                    confirmation = f.confirmation,
+                    new_Appointement_Date=f.new_Appointement_Date,
+                    notified_at=f.notified_at,
+                    patientnotif_id=f.patientnotif_id   
+                });
+            }
+            return View(films);
+        }
+
+        // GET: Notification/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Messenger/Create
+        // GET: Notification/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Messenger/Create
+        // POST: Notification/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -46,13 +70,13 @@ namespace Presentation.Controllers
             }
         }
 
-        // GET: Messenger/Edit/5
+        // GET: Notification/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Messenger/Edit/5
+        // POST: Notification/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -68,13 +92,13 @@ namespace Presentation.Controllers
             }
         }
 
-        // GET: Messenger/Delete/5
+        // GET: Notification/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Messenger/Delete/5
+        // POST: Notification/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

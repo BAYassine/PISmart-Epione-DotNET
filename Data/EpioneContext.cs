@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Data
 {
     using System;
@@ -5,12 +7,14 @@ namespace Data
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using Domain.Entities;
+    using Domain.Entities;
 
     public partial class EpioneContext : DbContext
     {
         public EpioneContext()
             : base("name=EpioneContext")
         {
+            Database.Log = sql => Debug.Write(sql);
         }
 
         public virtual DbSet<Appointment> appointments { get; set; }
@@ -58,10 +62,6 @@ namespace Data
                 .HasMany(e => e.reports)
                 .WithOptional(e => e.consultation)
                 .HasForeignKey(e => e.consultation_id);
-
-            modelBuilder.Entity<Doctor>()
-                .Property(e => e.location)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Doctor>()
                 .Property(e => e.presentation)
