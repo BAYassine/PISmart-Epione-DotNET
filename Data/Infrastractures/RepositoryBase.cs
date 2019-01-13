@@ -56,7 +56,7 @@ namespace Epione.Data.Infrastructure
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where = null, 
             Expression<Func<T, bool>> orderBy = null)
         {
-            IEnumerable<T> Query1 = dbset;
+           
             IQueryable<T> Query = dbset;
             if (where != null)
             {
@@ -66,7 +66,7 @@ namespace Epione.Data.Infrastructure
             {
                 Query = Query.OrderBy(orderBy);
             }
-            return Query1;
+            return Query;
         }
         public T Get(Expression<Func<T, bool>> where)
         {

@@ -11,7 +11,7 @@ namespace Domain.Entities
     {
         public int id { get; set; }
 
-        [StringLength(255)]
+         
         public string content { get; set; }
 
         public DateTime? date_msg { get; set; }

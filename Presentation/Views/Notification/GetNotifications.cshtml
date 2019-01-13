@@ -1,0 +1,36 @@
+﻿
+
+@model IEnumerable<Presentation.Models.NotificationVM>
+@using Presentation.Models
+
+
+<section id="cd-timeline2" class="cd-timeline-simple cd-container">
+@foreach (NotificationVM item in ViewBag.notification)
+{
+    <div class="cd-timeline-block">
+        <div class="cd-timeline-img cd-picture">
+            <img src="~/Content/images/notif.png" alt="Movie">
+        </div> <!-- cd-timeline-img -->
+
+        <div class="cd-timeline-content text-right flip pr-0">
+            <h2 class="mt-0"></h2>
+            <p style="color: black">@item.content</p>
+            <span class="cd-date" style="color: #00a3c8; font-weight:bold">@item.notified_at</span>
+        </div> <!-- cd-timeline-content -->
+    </div> <!-- cd-timeline-block -->
+
+    <div class="cd-timeline-block">
+        <div class="cd-timeline-img cd-movie">
+            <img src="~/Content/images/notif.png" alt="Movie">
+        </div> <!-- cd-timeline-img -->
+
+        <div class="cd-timeline-content pl-0">
+            <h2 class="mt-0"></h2>
+            <p style="color: black">@item.content</p>
+            <span class="cd-date" style="color: #00a3c8; font-weight:bold">@item.notified_at</span>
+        </div> <!-- cd-timeline-content -->
+    </div> <!-- cd-timeline-block -->
+
+}
+        </section>
+  

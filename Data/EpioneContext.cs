@@ -10,6 +10,7 @@ namespace Data
 
     public partial class EpioneContext : DbContext
     {
+
         public EpioneContext()
             : base("name=EpioneContext")
         {

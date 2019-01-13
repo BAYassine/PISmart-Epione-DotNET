@@ -1,0 +1,175 @@
+﻿@model IEnumerable<Presentation.Models.DoctorVM>
+    @using Presentation.Models
+    @{
+        ViewBag.Title = "SearchDoctor";
+    }
+
+  
+
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-8" data-bg-img="../../Content/images/bg/bg1.jpg">
+        <div class="container pt-60 pb-60">
+            <!-- Section Content -->
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12 xs-text-center">
+                        <h3 class="title text-white">Doctors</h3>
+                        <ol class="breadcrumb mt-10 white">
+                            <li><a class="text-white" href="#">Home</a></li>
+                            <li class="active text-theme-colored">Doctors</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Section: Doctors -->
+    <section>
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2 class="text-uppercase mt-0 line-height-1">Our Doctors</h2>
+                        <div class="title-icon">
+                            <img class="mb-10" src="images/title-icon.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+                    <div class="row">
+                        <div class="col-md-9">
+
+                            @if (ViewData["doctorsList"] != null)
+                            {
+                                foreach (DoctorVM item in (IEnumerable<DoctorVM>)ViewBag.doctorsList)
+                                {
+                                    <div class="upcoming-events bg-white-f3 mb-20">
+                                        <div class="row">
+                                            <div class="col-sm-4 pr-0 pr-sm-15">
+                                                <div class="thumb p-15">
+                                                    <img class="img-fullwidth" src=@item.image alt="...">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 pl-0 pl-sm-15">
+                                                <div class="event-details p-15 mt-20">
+                                                    <h4 class="media-heading text-uppercase font-weight-500">Dr. @item.name</h4>
+                                                    <p>@item.presentation olj,goesdgpm,jpmrsodmg,j qekfpqke^pkespk ^p;lg^pkesgok esgfpkeù^pgk</p>
+                                                    @*@Html.ActionLink("Make an Appointment", "Create", "Appointment")*@
+                                                 @using (Html.BeginForm("Create", "Appointment", FormMethod.Get))
+                                                 {
+                                                     <input type="hidden" name="doctor_id" value="@item.id"/>
+                                                    <input type="hidden" name="name" value="@item.name" />
+                                                    <input type="submit" class="btn btn-default form-control" value="Make an appointment"/> 
+                                                 }
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="event-count p-15 mt-15">
+                                                    <ul class="event-date list-inline font-16 text-uppercase mt-10 mb-20">
+                                                        <li class="p-15 mr-5 bg-lightest">@item.speciality.name</li>
+                                                      
+                                                    </ul>
+                                                    <ul>
+                                                        <li class="mb-10 text-theme-colored"><i class="fa fa-clock-o mr-5"></i> 9.00 am - 5.30 pm</li>
+                                                        <li class="text-theme-colored"><i class="fa fa-map-marker mr-5"></i> @item.address</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    }
+                                }
+                                else {
+                                <h2>There is no doctor .</h2>
+                                }
+
+
+
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="sidebar sidebar-right mt-sm-30">
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Search box</h5>
+                                    <div class="search-form">
+                                        <form>
+                                            <div class="input-group">
+                                                <input type="text" placeholder="Click to Search" class="form-control search-input">
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="btn search-button"><i class="fa fa-search"></i></button>
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="widget">
+                                    <h5 class="widget-title line-bottom">Latest News</h5>
+                                    <div class="latest-posts">
+                                        <article class="post media-post clearfix pb-0 mb-10">
+                                            <a class="post-thumb" href="#"><img src="https://placehold.it/75x75" alt=""></a>
+                                            <div class="post-right">
+                                                <h5 class="post-title mt-0"><a href="#">Sustainable Construction</a></h5>
+                                                <p>Lorem ipsum dolor sit amet adipisicing elit...</p>
+                                            </div>
+                                        </article>
+                                        <article class="post media-post clearfix pb-0 mb-10">
+                                            <a class="post-thumb" href="#"><img src="https://placehold.it/75x75" alt=""></a>
+                                            <div class="post-right">
+                                                <h5 class="post-title mt-0"><a href="#">Industrial Coatings</a></h5>
+                                                <p>Lorem ipsum dolor sit amet adipisicing elit...</p>
+                                            </div>
+                                        </article>
+                                        <article class="post media-post clearfix pb-0 mb-10">
+                                            <a class="post-thumb" href="#"><img src="https://placehold.it/75x75" alt=""></a>
+                                            <div class="post-right">
+                                                <h5 class="post-title mt-0"><a href="#">Storefront Installations</a></h5>
+                                                <p>Lorem ipsum dolor sit amet adipisicing elit...</p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+</section>
+
+
+
+
+            @*<table class="table">
+
+                @if (ViewData["doctorsList"] != null)
+                {
+                    foreach (DoctorVM item in (IEnumerable<DoctorVM>)ViewBag.doctorsList)
+                    {
+
+
+                        <tr>
+                            <td> spec id:</td>
+                            <td>
+
+                                @item.speciality.id
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td> Name:</td>
+                            <td>
+                                @item.name
+                            </td>
+                        </tr>
+
+
+                    }
+                }
+                else
+                { @ViewBag.result}
+
+            </table>*@

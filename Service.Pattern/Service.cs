@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Data.Infrastructures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Epione.Data.Infrastructures;
 
 namespace Service.Pattern
 {
     public abstract class Service<T> : IService<T> where T : class
     {
-        IUnitOfWork utk;
+         IUnitOfWork utk;
         protected Service(IUnitOfWork utk)
         {
             this.utk = utk;

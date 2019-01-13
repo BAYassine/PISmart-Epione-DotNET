@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Presentation.Models.DoctorVM>
+    @using Presentation.Models
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+
+        @foreach (DoctorVM item in (IEnumerable<DoctorVM>)ViewBag.doctors)
+        {
+
+            <tr>
+                <td> Name:</td>
+                <td>
+                    @item.name
+                </td>
+
+
+            </tr>
+            <tr>
+                <td> spec:</td>
+                <td>
+                    @item.speciality_id
+
+                </td>
+
+
+            </tr>
+        }
+
+    </table>

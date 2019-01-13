@@ -18,7 +18,7 @@ namespace Domain.Entities
 
         public int id { get; set; }
 
-        [StringLength(255)]
+         
         public string name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

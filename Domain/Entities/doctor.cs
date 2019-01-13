@@ -19,8 +19,15 @@ namespace Domain.Entities
             reasons = new HashSet<Reason>();
         }
 
+         
+        public string location { get; set; }
+
+         
         [StringLength(255)]
         public string presentation { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int id { get; set; }
 
         public int? speciality_id { get; set; }
 
@@ -73,6 +80,8 @@ namespace Domain.Entities
         public virtual Speciality speciality { get; set; }
 
         public virtual Skill skill { get; set; }
+
+        public virtual User user { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Path> paths { get; set; }

@@ -19,7 +19,7 @@ namespace Domain.Entities
 
         public DateTime? date_path { get; set; }
 
-        [StringLength(255)]
+         
         public string description { get; set; }
 
         public int? doctor_id { get; set; }

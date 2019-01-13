@@ -18,7 +18,7 @@ namespace Domain.Entities
 
         public int id { get; set; }
 
-        [StringLength(255)]
+         
         public string name { get; set; }
 
         public int? speciality_id { get; set; }

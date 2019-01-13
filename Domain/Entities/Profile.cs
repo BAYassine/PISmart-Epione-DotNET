@@ -30,8 +30,8 @@ namespace Domain.Entities
         [StringLength(255)]
         public string firstname { get; set; }
 
-        public Gender gender { get; set; }
-
+        public string gender { get; set; }
+        public string image { get; set; }
         [Required]
         [StringLength(255)]
         public string lastname { get; set; }
