@@ -8,11 +8,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>:: @ViewBag.Title - Doctor space ::</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    @Styles.Render("~/Content/Swift-css/plugins/bootstrap/css/bootstrap.min.css")
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css">
-    @Styles.Render("~/Content/Swift-css/plugins/morrisjs/morris.css")
-    <!-- Custom Css -->
-    @Styles.Render("~/Content/Swift-css/css/main.css")
+    <link href="~/Content/calendar/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/calendar/modernizr-2.6.2.js"></script>
 </head>
 <body class="theme-blue">
     <!-- Page Loader -->
@@ -65,16 +62,11 @@
 
     <div class="color-bg"></div>
     <!-- Jquery Core Js -->
-    @Scripts.Render("~/Scripts/Swift-js/bundles/libscripts.bundle.js") <!-- Lib Scripts Plugin Js -->
-    @Scripts.Render("~/Scripts/Swift-js/bundles/vendorscripts.bundle.js") <!-- Lib Scripts Plugin Js -->
 
-    @Scripts.Render("~/Scripts/Swift-js/bundles/chartscripts.bundle.js") <!-- Chart Plugins Js -->
-    @Scripts.Render("~/Scripts/Swift-js/bundles/sparklinescripts.bundle.js") <!-- Chart Plugins Js -->
 
-    @Scripts.Render("~/Scripts/Swift-js/bundles/mainscripts.bundle.js") <!-- Custom Js -->
-    @Scripts.Render("~/Scripts/Swift-js/js/pages/index.js")
-    @Scripts.Render("~/Scripts/Swift-js/js/pages/charts/sparkline.min.js")
-</body>
+    <script src="~/Content/calendar/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/calendar/bootstrap.min.js"></script>
+    @RenderSection("Scripts", false)</body>
 
 <!-- Mirrored from thememakker.com/templates/swift/hospital/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 10 Nov 2018 14:33:09 GMT -->
 </html>

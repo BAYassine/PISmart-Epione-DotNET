@@ -1,0 +1,211 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />  
+</head>
+<body>
+    <h2 style="text-align:center"></h2>
+    <section id="doctors">
+        <div class="container">
+            <div class="section-title text-center">
+                <div class="row">
+
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2 class="text-uppercase mt-0 line-height-1">Our Doctors</h2>
+                        <div class="title-icon">
+                            <img class="mb-10" src="~/Content/images/title-icon.png" alt="">
+                        </div>
+                        <p>You can see a bunch of our doctors here</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mtli-row-clearfix">
+                <div class="col-md-12">
+                    <div class="owl-carousel-3col">
+
+
+                        @foreach (var x in ViewBag.result)
+                        {
+                            <div class="item">
+                                <div class="team-members border-bottom-theme-color-2px text-center maxwidth400">
+                                    <div class="team-thumb">
+                                        <img class="img-fullwidth" alt="" src="@Url.Content(@x.image)" style="width:20%" id="myimage" >
+                                        <div class="team-overlay"></div>
+                                    </div>
+                                    <div class="team-details bg-silver-light pt-10 pb-10">
+                                        <h4 class="text-uppercase font-weight-600 m-5">@x.name</h4>
+                                        <h6 class="text-theme-colored font-15 font-weight-400 mt-0">Speciality: @x.presentation</h6>
+                                        <h6 class="text-theme-colored font-15 font-weight-400 mt-0">@x.city</h6>
+                                        <ul class="styled-icons icon-theme-colored icon-dark icon-circled icon-sm">
+                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+
+                    <div id='map' style='width: 100%; height: 400px;'></div>
+</section>
+
+</body>
+
+</html>
+<!--
+<script>
+
+        function initMap() {
+            var myLatLng = {lat: -25.363, lng: 131.044};
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 36.8610302310084, lng: 10.333411930051625 },
+                zoom: 15
+            });
+
+            var myLatLng1 = { lat: 36.86103023100842, lng: 10.333411930051625 };
+            var myLatLng2 = { lat: 36.86745654020583, lng: 10.32623436227891 };
+            var myLatLng3 = {lat: 59.9731275, lng: 30.2179721};
+            var myLatLng4 = {lat: 55.820983, lng: 49.1587774};
+            var myLatLng5 = {lat: 53.2385626, lng: 50.2700685};
+            var myLatLng6 = {lat: 55.715804, lng: 37.553726};
+            var myLatLng7 = {lat: 47.2092093, lng: 45.1379301};
+            var myLatLng8 = {lat: 43.402037, lng: 39.9534621};
+            var myLatLng9 = {lat: 55.7967156, lng: 49.096602};
+            var myLatLng10 = {lat: 56.8324898, lng: 60.5713961};
+            var myLatLng11 = {lat: 56.309507, lng: 43.9270923};
+            var myLatLng12 = {lat: 54.717694, lng: 20.4889237};
+
+            var marker1 = new google.maps.Marker({
+                position: myLatLng1,
+                map: map,
+                title: 'Dr Stephan Thisier'
+            });
+            var marker2 = new google.maps.Marker({
+                position: myLatLng2,
+                map: map,
+                title: 'Dr Mohamed Bachtobji'
+            });
+            var marker3 = new google.maps.Marker({
+                position: myLatLng3,
+                map: map,
+                title: 'Gazprom Arena'
+            });
+            var marker4 = new google.maps.Marker({
+                position: myLatLng4,
+                map: map,
+                title: 'Kazan Arena'
+            });
+            var marker5 = new google.maps.Marker({
+                position: myLatLng5,
+                map: map,
+                title: 'Metallurg Stadium'
+            });
+            var marker6 = new google.maps.Marker({
+                position: myLatLng6,
+                map: map,
+                title: 'Ledovaya Arena Proletarskogo Rayona'
+            });
+            var marker7 = new google.maps.Marker({
+                position: myLatLng7,
+                map: map,
+                title: 'Levberdon Arena'
+            });
+            var marker8 = new google.maps.Marker({
+                position: myLatLng8,
+                map: map,
+                title: 'Olympic Stadium Fisht'
+            });
+            var marker9 = new google.maps.Marker({
+                position: myLatLng9,
+                map: map,
+                title: 'Central Stadium'
+            });
+            var marker10 = new google.maps.Marker({
+                position: myLatLng10,
+                map: map,
+                title: 'Central Stadium'
+            });
+            var marker11 = new google.maps.Marker({
+            position: myLatLng11,
+                    map: map,
+                    title: 'Lokomotiv Stadium'
+        });
+            var marker12 = new google.maps.Marker({
+        position: myLatLng12,
+                map: map,
+                title: 'Arena Baltika'
+        });
+        }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD30awvN1IP-nB7aPB6I-P7yaqvUU17KU&callback=initMap">
+</script>
+
+
+-->
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZmFyZXNsbGxsbGxsbGxsbGxsbGwiLCJhIjoiY2pveWQ0eW84MHhpZzNxcGN6bzFnZGRmbyJ9.J4K4Ssfq1rAHo4BUdH7bDQ';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        center: new mapboxgl.LngLat(2.2137,46.2276),
+        style: 'mapbox://styles/mapbox/streets-v10',
+        zoom:5
+    });
+     
+</script>
+
+@foreach (var x in ViewBag.result)
+{
+    <script>var marker = new mapboxgl.Marker()
+    .setLngLat(new mapboxgl.LngLat(@x.longitude.ToString().Replace(",", "."), @x.latitude.ToString().Replace(",", ".")))
+    .setPopup(new mapboxgl.Popup({ offset: 25 })
+    .setHTML('<img src="'+'@Url.Content(@x.image)'+'">'+'<h3>' + '@x.name'+'<br>'+'<p style="color:red">'+'@x.presentation'+'</p>' + '</h3><br><p>' + '@x.address' + '</p>'))
+    .addTo(map);</script>
+}
+
+
+
+<style>
+   .myimage{
+       width:20%;
+   }
+   .marker {
+
+  width: 35px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+   .mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+</style>
+
+
+
+
+
+
+
+
+
+

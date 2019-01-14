@@ -29,5 +29,7 @@ namespace Presentation.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Presentation.Models.AppointmentVM> AppointmentVMs { get; set; }
     }
 }

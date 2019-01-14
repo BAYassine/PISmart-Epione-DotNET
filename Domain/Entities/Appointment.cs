@@ -29,12 +29,13 @@ namespace Domain.Entities
         [StringLength(255)]
         public string message { get; set; }
 
+        [StringLength(255)]
+        public string sujet { get; set; }
+
         public States state { get; set; }
 
         public int? doctor_id { get; set; }
-
         public int? patient_id { get; set; }
-
         public int? reason_id { get; set; }
 
         public virtual Doctor doctor { get; set; }

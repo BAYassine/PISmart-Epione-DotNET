@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "ConsultDelete";
+}
+
+<h2>All consultations with deleting option</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Consultations</th>
+            <th scope="col">Price</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Remarks</th>
+            <th scope="col">Delete</th>
+           
+
+        </tr>
+    </thead>
+    @foreach (var x in ViewBag.result)
+
+    {
+
+
+        <tr class="table-bordered">
+        <td></td>
+            <td>@x.price</td>
+            <td>@x.rating</td>
+            <td>@x.remarks</td>
+            <td><a href="@Url.Action("Delete","Consultation",new { id = x.id })" class="btn  btn-raised btn-danger waves-effect">Delete</a></td>
+           
+
+
+        </tr>}
+
+
+
+    
+
+</table>
+
+
+
