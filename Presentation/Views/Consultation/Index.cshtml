@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>All consultations</h2>
+
+
+
+<main class="theia-exception">
+
+    <div class="col-md-6">
+
+    </div>
+
+    <div id="results">
+        <div class="container">
+
+     
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /results -->
+
+
+ 
+
+    <div class="container margin_60_35">
+        <div class="row1">
+
+
+
+
+
+        
+   
+            <div class="section-content">
+                <div class="row">
+@foreach (var x in ViewBag.result)
+{
+                    <div class="col-md-4 col-sm-6">
+                        <div class="feturead mb-30 mb-sm-30">
+                            <div class="thumb"> <img src="~/Content/images/services/s1.jpg" class="img-fullwidth" alt="" style="width:500px;position:relative;"> </div>
+                            <div class="bg-white p-20">
+                                <h4 class="line-bottom text-uppercase font-weight-300 mt-0 mb-15">Consultation ID is : @x.id</h4>
+                                <p>Consultation price is : @x.price€ </p>
+                                <ul>@Html.ActionLink("View Details","DisplayConsultation", new { id = x.id }, new { @style = "color:purple" })</ul>
+                            </div>
+                        </div>
+                    </div>
+}
+                </div>
+            </div>
+
+
+
+
+
+   
+            <!-- /aside -->
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</main>
+
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in ViewBag.result)
+            {
+                <tr>
+                    <th>@x.id</th>
+                    <th>@x.price</th>
+                    <th>@x.rating</th>
+                    <th>@x.remarks</th>
+                </tr>
+
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Remarks</th>
+            </tr>
+        </tfoot>
+    </table>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+    <style>
+        .row1 {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .img-fullwidth {
+            width: 300px;
+        }
+
+        .thumb {
+            width: 300px;
+        }
+
+        .section-content {
+            width: 100%;
+        }
+
+        .row {
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+

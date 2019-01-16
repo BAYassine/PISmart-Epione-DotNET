@@ -67,7 +67,7 @@ namespace Presentation.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
                 //Sending request to find web api REST service resource doList using HttpClient  
-                HttpResponseMessage Res =  client.GetAsync("epione-jee-web/api/Appointment").Result;
+                HttpResponseMessage Res =  client.GetAsync("epione-jee-web/api/Appointment/all").Result;
 
                 //Checking the response is successful or not which is sent using HttpClient  
                

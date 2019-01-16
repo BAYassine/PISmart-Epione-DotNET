@@ -67,7 +67,36 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
+                        <li>
+                            <a href="#">Doctor space<span class="indicator"></span></a>
+                            <ul class="dropdown" style="right: auto; display: none;">
+                                <li>
+                                <a href="">My appointments</a>
+                                    <ul class="dropdown">
+                                        <li><a href="@Url.Action("Index", "Appointment")">View my appointments</a></li>
+                                        <li><a href="@Url.Action("AppDelete", "Appointment")">Delete appointment</a></li>
+                                    </ul>
+                                    
+                                </li>
+                                <li>
+                                <a href="">My consultations</a>
+                                    <ul class="dropdown">
+                                        <li><a href="@Url.Action("Index", "Consultation")">View my consultations</a></li>
+                                        <li><a href="@Url.Action("Create", "Consultation")">Add a new consultation (Already had)</a></li>
+                                        <li><a href="@Url.Action("ConsultDelete", "Consultation")">Delete a consultation</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                <a href="page-doctors-details.html">My calendar</a>
+                                    <ul class="dropdown">
+                                        <li><a href="http://localhost:11952/Doctor/AppointementDoctor">My calendar and events</a></li>
+                                     
+                                    </ul>
+                                </li>
+                                <li><a href="@Url.Action("Index", "Doctor")">Other doctors and colleagues</a></li>
+                            </ul>
+                        </li>
+                    </ul>                   
                     <ul class="menuzord-menu">
                         <li class="">
                             <a href="@Url.Action("Messenger", "Messenger")">Messenger</a>

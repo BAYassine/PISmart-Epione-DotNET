@@ -37,5 +37,7 @@ namespace Presentation.Models
         public System.Data.Entity.DbSet<Presentation.Models.ReportVM> ReportVMs { get; set; }
 
         public System.Data.Entity.DbSet<Presentation.Models.AccountVM> AccountVMs { get; set; }
+
+        public System.Data.Entity.DbSet<Presentation.Models.AppointmentVM> AppointmentVMs { get; set; }
     }
 }

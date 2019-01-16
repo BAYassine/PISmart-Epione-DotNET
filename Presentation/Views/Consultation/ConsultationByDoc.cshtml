@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "ConsultationByDoc";
+}
+
+<h2>ConsultationByDoc</h2>
+@foreach (var x in ViewBag.result)
+{
+    <tr>
+        <th scope="row">@x.price</th>
+        <th scope="row">@x.id</th>
+    </tr>
+
+}
+

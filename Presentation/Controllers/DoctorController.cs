@@ -22,12 +22,14 @@ namespace Presentation.Controllers
         static HttpClient client = new HttpClient();
 
         private static IDoctorService userService = new DoctorService();
+
         // Author : Yassine
         public async Task<ActionResult> Dashboard()
         {
             if (Session["authtoken"] == null)
-                return RedirectToAction("Login", "Auth", new { returnUrl = HttpContext.Request.Url.AbsolutePath });
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+                return RedirectToAction("Login", "Auth", new {returnUrl = HttpContext.Request.Url.AbsolutePath});
+            client.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
             String response = await client.GetStringAsync("http://localhost:18080/epione-jee-web/api/dashboard");
             JObject dash_data = JObject.Parse(response);
             ViewData["dash_data"] = dash_data;
@@ -36,11 +38,12 @@ namespace Presentation.Controllers
 
         public async Task<ActionResult> UpdateAppointment(int id, bool state)
         {
-
             if (Session["authtoken"] == null)
-                return RedirectToAction("Login", "Auth", new { returnUrl = HttpContext.Request.Url.AbsolutePath });
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
-            await client.PutAsync("http://localhost:18080/epione-jee-web/api/Appointment/changestate/" + id + "?action=" + state, null);
+                return RedirectToAction("Login", "Auth", new {returnUrl = HttpContext.Request.Url.AbsolutePath});
+            client.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+            await client.PutAsync(
+                "http://localhost:18080/epione-jee-web/api/Appointment/changestate/" + id + "?action=" + state, null);
             return RedirectToAction("Dashboard");
         }
 
@@ -48,8 +51,8 @@ namespace Presentation.Controllers
         public ActionResult Account()
         {
             if (Session["authtoken"] == null)
-                return RedirectToAction("Login", "Auth", new { returnUrl = HttpContext.Request.Url.AbsolutePath });
-            Domain.Entities.Doctor doctor = (Domain.Entities.Doctor)Session["user"];
+                return RedirectToAction("Login", "Auth", new {returnUrl = HttpContext.Request.Url.AbsolutePath});
+            Domain.Entities.Doctor doctor = (Domain.Entities.Doctor) Session["user"];
             AccountVM accountVM = new AccountVM
             {
                 username = doctor.username,
@@ -63,11 +66,12 @@ namespace Presentation.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Account([Bind(Include = "email,username,password,currentPassword")] AccountVM accountVM)
+        public ActionResult Account([Bind(Include = "email,username,password,currentPassword")]
+            AccountVM accountVM)
         {
             if (ModelState.IsValid)
             {
-                Doctor u = userService.GetById(((User)Session["user"]).Id);
+                Doctor u = userService.GetById(((User) Session["user"]).Id);
                 if (BCrypt.Net.BCrypt.Verify(accountVM.currentPassword, u.password))
                 {
                     u.email = accountVM.email;
@@ -85,6 +89,7 @@ namespace Presentation.Controllers
                     ViewBag.error = "You entered a wrong password";
                 }
             }
+
             return View(accountVM);
         }
 
@@ -96,6 +101,7 @@ namespace Presentation.Controllers
                 output.Write(prop.DisplayName); // header
                 output.Write("\t");
             }
+
             output.WriteLine();
             foreach (T item in data)
             {
@@ -105,6 +111,7 @@ namespace Presentation.Controllers
                         prop.GetValue(item)));
                     output.Write("\t");
                 }
+
                 output.WriteLine();
             }
         }
@@ -127,8 +134,10 @@ namespace Presentation.Controllers
             {
                 ViewBag.result = "erreur";
             }
+
             return View();
         }
+
         // GET: Doctor/SearchDoctor
         public async Task<ActionResult> SearchDoctor(DoctorVM model)
         {
@@ -146,41 +155,48 @@ namespace Presentation.Controllers
                 uriString = uriString + "?idS=" + model.speciality_id;
             }
             //search by name
-            else if (model.latitude == null && model.longitude == null && model.name != null && model.speciality_id == 0)
+            else if (model.latitude == null && model.longitude == null && model.name != null &&
+                     model.speciality_id == 0)
             {
                 uriString = uriString + "?name=" + model.name;
             }
             //search by location 
-            else if (model.latitude != null && model.longitude != null && model.name == null && model.speciality_id == 0)
+            else if (model.latitude != null && model.longitude != null && model.name == null &&
+                     model.speciality_id == 0)
             {
                 uriString = uriString + "?lon=" + model.longitude + "&lat=" + model.latitude;
-
             }
             //search by name and speciality
-            else if (model.latitude == null && model.longitude == null && model.name != null && model.speciality_id != 0)
+            else if (model.latitude == null && model.longitude == null && model.name != null &&
+                     model.speciality_id != 0)
             {
                 uriString = uriString + "?idS=" + model.speciality_id + "&name=" + model.name;
                 System.Diagnostics.Debug.WriteLine(uriString);
             }
             //search by name and location
-            else if (model.latitude != null && model.longitude != null && model.name != null && model.speciality_id == 0)
+            else if (model.latitude != null && model.longitude != null && model.name != null &&
+                     model.speciality_id == 0)
             {
                 uriString = uriString + "?lon=" + model.longitude + "&lat=" + model.latitude + "&name=" + model.name;
             }
             //search by location and speciality
-            else if (model.latitude != null && model.longitude != null && model.name == null && model.speciality_id != 0)
+            else if (model.latitude != null && model.longitude != null && model.name == null &&
+                     model.speciality_id != 0)
             {
-                uriString = uriString + "?idS=" + model.speciality_id + "&lon=" + model.longitude + "&lat=" + model.latitude + "&name=" + model.name;
+                uriString = uriString + "?idS=" + model.speciality_id + "&lon=" + model.longitude + "&lat=" +
+                            model.latitude + "&name=" + model.name;
             }
             else
             {
                 uriString = "http://localhost:18080/epione-jee-web/api/Home/Index";
-
             }
+
             // HttpResponseMessage response = await Client.GetAsync("http://localhost:18080/epione-jee-web/api/Doctor?idS=1&lon=&lat=5&name=oumayma");
             HttpResponseMessage response = await Client.GetAsync(uriString);
 
-            System.Diagnostics.Debug.WriteLine("http://localhost:18080/epione-jee-web/api/Doctor?idS=" + model.speciality_id + "&lon=" + model.longitude + "&lat=" + model.latitude + "&name=" + model.name);
+            System.Diagnostics.Debug.WriteLine("http://localhost:18080/epione-jee-web/api/Doctor?idS=" +
+                                               model.speciality_id + "&lon=" + model.longitude + "&lat=" +
+                                               model.latitude + "&name=" + model.name);
             if (response.IsSuccessStatusCode)
             {
                 list = await response.Content.ReadAsAsync<IEnumerable<DoctorVM>>();
@@ -191,6 +207,7 @@ namespace Presentation.Controllers
             {
                 ViewBag.result = "erreur";
             }
+
             return View();
         }
 
@@ -272,5 +289,88 @@ namespace Presentation.Controllers
         //    }
         //}
 
+        // GET: Doctor
+        public ActionResult IndexFB()
+        {
+            HttpClient Client1 = new HttpClient();
+            Client1.BaseAddress = new Uri("http://localhost:18080");
+            Client1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = Client1.GetAsync("epione-jee-web/api/Doctor").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                ViewBag.result = response.Content.ReadAsAsync<IEnumerable<DoctorVM>>().Result;
+            }
+            else
+            {
+                ViewBag.result = response.IsSuccessStatusCode;
+            }
+
+            return View();
+        }
+
+
+        public ActionResult UpdateProfil()
+        {
+            HttpClient Client1 = new HttpClient();
+            Client1.BaseAddress = new Uri("http://localhost:18080");
+            Client1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = Client1.GetAsync("epione-jee-web/api/Doctor").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                ViewBag.result = response.Content.ReadAsAsync<IEnumerable<DoctorVM>>().Result;
+            }
+            else
+            {
+                ViewBag.result = response.IsSuccessStatusCode;
+            }
+
+            return View();
+        }
+
+
+        public JsonResult GetEvents()
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+            client.BaseAddress = new Uri("http://localhost:18080");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response =
+                client.GetAsync("epione-jee-web/api/Appointment/SearchAllAppointments").Result;
+            var events = response.Content.ReadAsAsync<IEnumerable<AppointmentVM>>().Result;
+            return new JsonResult {Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+        }
+
+        // GET: Doctor/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public JsonResult SaveEvent(AppointmentVM l)
+        {
+            //int id = ressourceId;
+            var status = false;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:18080");
+            client.PostAsJsonAsync<AppointmentVM>("epione-jee-web/api/Appointment/addAPPhh", l)
+                .ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
+            //client.PostAsJsonAsync<Appointment>("epione-jee-web/api/Appointment/addAPPhh", l).ContinueWith((p => p.Result.EnsureSuccessStatusCode()));
+            status = true;
+            return new JsonResult {Data = new {status = status}};
+        }
+
+        public ActionResult AppointementDoctor()
+        {
+            return View();
+        }
+
+        // GET: Doctor/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
     }
 }

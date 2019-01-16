@@ -15,6 +15,7 @@
     @Styles.Render("~/Content/Swift-css/css/main.css")
 
     @Styles.Render("~/Scripts/Swift-js/js/pages/jquery-nestable.css")
+    @RenderSection("styles", required : false)
 </head>
 <body class="theme-blue">
     <!-- Page Loader -->
@@ -67,11 +68,7 @@
 
     <div class="color-bg"></div>
     <!-- Jquery Core Js -->
-    @Scripts.Render("~/Scripts/Swift-js/bundles/libscripts.bundle.js") <!-- Lib Scripts Plugin Js -->
-    @Scripts.Render("~/Scripts/Swift-js/bundles/vendorscripts.bundle.js") <!-- Lib Scripts Plugin Js -->
 
-    @Scripts.Render("~/Scripts/Swift-js/bundles/chartscripts.bundle.js") <!-- Chart Plugins Js -->
-    @Scripts.Render("~/Scripts/Swift-js/bundles/sparklinescripts.bundle.js") <!-- Chart Plugins Js -->
 
     @Scripts.Render("~/Scripts/Swift-js/bundles/mainscripts.bundle.js") <!-- Custom Js -->
     @Scripts.Render("~/Scripts/Swift-js/js/pages/index.js")

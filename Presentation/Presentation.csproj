@@ -120,6 +120,10 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entity.6.8.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -202,9 +206,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Http">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
@@ -260,6 +261,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\ConsultationController.cs" />
     <Compile Include="Controllers\DoctolibController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
@@ -281,6 +284,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppointmentVM.cs" />
+    <Compile Include="Models\ConsultationVM.cs" />
     <Compile Include="Models\CreatRatingVM.cs" />
     <Compile Include="Models\DoctolibDoctorVM.cs" />
     <Compile Include="Models\DoctolibOtherVM.cs" />
@@ -315,6 +319,24 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\calendar\bootstrap.js" />
+    <Content Include="Content\calendar\bootstrap.min.css" />
+    <Content Include="Content\calendar\bootstrap.min.js" />
+    <None Include="Content\calendar\jquery-1.10.2.intellisense.js" />
+    <Content Include="Content\calendar\jquery-1.10.2.js" />
+    <Content Include="Content\calendar\jquery-1.10.2.min.js" />
+    <Content Include="Content\calendar\modernizr-2.6.2.js" />
+    <Content Include="Content\calendar\Site.css" />
+    <Content Include="Content\css\css\bootstrap-theme.css" />
+    <Content Include="Content\css\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\css\bootstrap.css" />
+    <Content Include="Content\css\css\bootstrap.min.css" />
+    <Content Include="Content\css\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\css\js\bootstrap.js" />
+    <Content Include="Content\css\js\bootstrap.min.js" />
+    <Content Include="Content\css\js\jquery-3.3.1.js" />
+    <Content Include="Content\css\js\npm.js" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\images\about\4.png" />
     <Content Include="Content\images\about\5.jpg" />
     <Content Include="Content\images\about\a1.jpg" />
@@ -1015,11 +1037,23 @@
     <Content Include="Content\js\revolution-slider\fonts\revicons\revicons90c6.eot" />
     <Content Include="Content\js\revolution-slider\fonts\revicons\revicons90c6.ttf" />
     <Content Include="Content\js\revolution-slider\fonts\revicons\revicons90c6.woff" />
+    <Content Include="Content\calendar\jquery-1.10.2.min.map" />
+    <Content Include="Content\css\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\css\css\bootstrap.css.map" />
+    <Content Include="Content\css\css\bootstrap.min.css.map" />
+    <Content Include="Content\css\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\css\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\css\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\css\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.3.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.3.0.min.js" />
     <Content Include="Scripts\jquery.signalR-2.4.0.js" />
     <Content Include="Scripts\jquery.signalR-2.4.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -1193,6 +1227,18 @@
     <Content Include="Views\Rating\Delete.cshtml" />
     <Content Include="Views\Rating\Index.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\Calendar\Calendar.cshtml" />
+    <Content Include="Views\Consultation\ConsultationByDoc.cshtml" />
+    <Content Include="Views\Consultation\ConsultDelete.cshtml" />
+    <Content Include="Views\Consultation\Create.cshtml" />
+    <Content Include="Views\Consultation\DisplayConsultation.cshtml" />
+    <Content Include="Views\Consultation\Index.cshtml" />
+    <Content Include="Views\Appointment\AppDelete.cshtml" />
+    <Content Include="Views\Appointment\Index.cshtml" />
+    <Content Include="Views\Doctor\AppointementDoctor.cshtml" />
+    <Content Include="Views\Doctor\IndexFB.cshtml" />
+    <Content Include="Views\Home\IndexFB.cshtml" />
+    <Content Include="Views\Shared\_MenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

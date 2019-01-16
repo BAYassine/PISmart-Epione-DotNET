@@ -26,11 +26,6 @@ namespace Presentation.Controllers
     {
         IAppointmentService serv = new AppointmentService();
         int i = 8;
-        // GET: Appointment
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         // GET: Appointment/Details/5
         public ActionResult Details(int id)
@@ -294,5 +289,101 @@ namespace Presentation.Controllers
         //        return View();
         //    }
         //}
+        public ActionResult Index()
+        {
+            if (Session["authtoken"] == null)
+                return RedirectToAction("Login", "Auth");
+            HttpClient Client2 = new HttpClient();
+            Client2.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+            Client2.BaseAddress = new Uri("http://localhost:18080");
+            Client2.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = Client2.GetAsync("epione-jee-web/api/Appointment/SearchAllAppointments").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                ViewBag.result = response.Content.ReadAsAsync<IEnumerable<AppointmentVM>>().Result;
+
+            }
+            else
+            {
+                ViewBag.result = response.IsSuccessStatusCode;
+            }
+            return View();
+        }
+
+        public ActionResult CalendarRessource(int id)
+        {
+
+            AppointmentVM r = new AppointmentVM();
+            HttpClient Client = new HttpClient();
+            Client.BaseAddress = new Uri("http://localhost:18080");
+            Client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = Client.GetAsync("epione-jee-web/api/Appointment?id=" + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+
+                    r = response.Content.ReadAsAsync<AppointmentVM>().Result;
+
+                }
+                catch (NullReferenceException) { }
+            }
+            return View(r);
+
+        }
+
+        // GET: Appointment
+        public ActionResult AppDelete()
+        {
+            if (Session["authtoken"] == null)
+                return RedirectToAction("Login", "Auth");
+            HttpClient Client2 = new HttpClient();
+            Client2.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");
+            Client2.BaseAddress = new Uri("http://localhost:18080");
+            Client2.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = Client2.GetAsync("epione-jee-web/api/Appointment/SearchAllAppointments").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                ViewBag.result = response.Content.ReadAsAsync<IEnumerable<AppointmentVM>>().Result;
+
+            }
+            else
+            {
+                ViewBag.result = response.IsSuccessStatusCode;
+            }
+            return View();
+        }
+
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                /* if (Session["authtoken"] == null)
+                return RedirectToAction("Login", "Auth");*/
+                HttpClient Client = new HttpClient();
+                /*Client.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Session["authtoken"] + "");*/
+                Client.BaseAddress = new Uri("http://localhost:18080");
+                Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string ch = "epione-jee-web/api/Appointment/Delete?id=" + id;
+                HttpResponseMessage response = Client.DeleteAsync(ch).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.result = response.IsSuccessStatusCode;
+                }
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }
