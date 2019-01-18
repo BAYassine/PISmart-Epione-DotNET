@@ -1,49 +1,37 @@
-﻿
-@using Domain.Entities;
-<link rel="stylesheet" type="text/css" href="~/Content/assests/style.css" />
+﻿@using Domain.Entities;
+<link rel="stylesheet" type="text/css" href="~/Content/assests/style.css"/>
 <link rel="stylesheet" type="text/css" href="~/Content/assests/nanoscroller.css"/>
 
-<link rel="stylesheet" type="text/css" href="~/Content/assests/theme-switcher.min.css" /><link type="text/css" href="" rel="stylesheet">  
-    @if (Session["authtoken"] != null)
-    {
-        <ul class="menuzord-menu">
-            <li class="active">
-                <a href="#home">Home</a>
-               
-            </li>
-            <li>
-                @Html.ActionLink("My Profile", "Details", "Patient")
-            </li>
-            <li class="">
-             @Html.ActionLink("My Appointments", "AppointmentByPatient", "Appointment")
-                <ul class="dropdown">
-                    <li>
-                        <a href="#">@Html.ActionLink("Previous Appointments", "PreviousAppointment", "Appointment")</a>
-                       
-                    </li>
-                    <li>
-                        <a href="#">@Html.ActionLink("Upcoming Appointments", "UpcomingAppointment", "Appointment")</a>
+<link rel="stylesheet" type="text/css" href="~/Content/assests/theme-switcher.min.css"/><link type="text/css" href="" rel="stylesheet">
+@if (Session["authtoken"] != null)
+{
+    <ul class="menuzord-menu">
+        <li>
+            @Html.ActionLink("My Profile", "Details", "Patient")
+        </li>
+        <li class="">
+            @Html.ActionLink("My Appointments", "AppointmentByPatient", "Appointment")
+            <ul class="dropdown">
+                <li>
+                    <a href="#">@Html.ActionLink("Previous Appointments", "PreviousAppointment", "Appointment")</a>
 
-                    </li>
-                </ul>
-            </li>
-          
-            <li>
-                   <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">  <i class="fa fa-bell facebook"></i> <span class="indicator"></span></a>
-                <ul class="dropdown-menu am-notifications">
-                    @Html.ActionLink("My Notifications", "GetNotifications", "Notification")
-                  
-                </ul>
                 </li>
-          
-                </ul>
-                }
-                else
-                {
-                <ul class="menuzord-menu">
-                    <li class="active">
-                        <a href="#home">Home</a>
-                     
-                    </li>
-                </ul>
-                }
+                <li>
+                    <a href="#">@Html.ActionLink("Upcoming Appointments", "UpcomingAppointment", "Appointment")</a>
+
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">
+                <i class="fa fa-bell facebook"></i> <span class="indicator"></span>
+            </a>
+            <ul class="dropdown-menu am-notifications">
+                @Html.ActionLink("My Notifications", "GetNotifications", "Notification")
+
+            </ul>
+        </li>
+
+    </ul>
+}

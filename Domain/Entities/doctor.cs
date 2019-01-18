@@ -19,10 +19,7 @@ namespace Domain.Entities
             reasons = new HashSet<Reason>();
         }
 
-         
-        public string location { get; set; }
 
-         
         [StringLength(255)]
         public string presentation { get; set; }
 

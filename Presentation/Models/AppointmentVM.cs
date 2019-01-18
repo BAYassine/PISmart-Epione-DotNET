@@ -22,7 +22,7 @@ namespace Presentation.Models
         public string state { get; set; }
         public int stat { get; set; }
         public int doctor_id { get; set; }
-        public string sujet { get; set; }
+        public string title { get; set; }
         public int patient_id { get; set; }
         public int reason_id { get; set; }
         public virtual Doctor doctor { get; set; }

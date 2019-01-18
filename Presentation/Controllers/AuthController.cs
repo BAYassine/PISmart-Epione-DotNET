@@ -40,6 +40,7 @@ namespace Presentation.Controllers
             Session["authtoken"] = body;
             if (response.IsSuccessStatusCode)
             {
+                Session["username"] = username;
                 JToken json = JToken.Parse(response.Content.ReadAsStringAsync().Result);
                 if (json["role"].ToString() == "ROLE_PATIENT")
                 {

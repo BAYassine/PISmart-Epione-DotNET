@@ -25,12 +25,11 @@ namespace Domain.Entities
         public DateTime? date_end { get; set; }
 
         public DateTime date_start { get; set; }
-
          
         public string message { get; set; }
 
         [StringLength(255)]
-        public string sujet { get; set; }
+        public string title { get; set; }
 
         public States state { get; set; }
 
